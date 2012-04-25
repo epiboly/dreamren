@@ -1,5 +1,5 @@
 <?php
-if (!defined('THINKSNS_INSTALL'))
+if (!defined('WEKIT_INSTALL'))
 {
 	exit ('Access Denied');
 }

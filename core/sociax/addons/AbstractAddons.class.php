@@ -1,15 +1,5 @@
 <?php
-/**
- * AbstractAddons
- * 抽象接口类
- * @uses AddonsInterface
- * @abstract
- * @package
- * @version $id$
- * @copyright 2001-2013 SamPeng
- * @author SamPeng <penglingjun@zhishisoft.com>
- * @license PHP Version 5.2 {@link www.sampeng.org}
- */
+
 abstract class AbstractAddons implements AddonsInterface{
     protected $version;         //版本号
     protected $author;          //作者

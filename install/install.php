@@ -5,20 +5,19 @@
 
 error_reporting(0);
 session_start();
-define('THINKSNS_INSTALL', TRUE);
-define('THINKSNS_ROOT', str_replace('\\', '/', substr(dirname(__FILE__), 0, -7)));
+define('WEKIT_INSTALL', TRUE);
+define('WEKIT_ROOT', str_replace('\\', '/', substr(dirname(__FILE__), 0, -7)));
 
-$_TSVERSION = '2.5';
+$_TSVERSION = '1.0';
 
 include 'install_function.php';
 include 'install_lang.php';
 
 $timestamp				=	time();
 $ip						=	getip();
-$installfile			=	't_thinksns_com.sql';
-$thinksns_config_file	=	'config.inc.php';
+$installfile			=	'wekit.sql';
+$wekit_config_file	=	'config.inc.php';
 
-//判断是否安装过
 header('Content-Type: text/html; charset=utf-8');
 if (file_exists('install.lock'))
 {
@@ -49,11 +48,11 @@ if (!get_magic_quotes_gpc())
 <body>
 <div id='content'>
 <div id='pageheader'>
-	<div id="logo"><img src="images/thinksns.gif" width="260" height="80" border="0" alt="ThinkSNS" /></div>
+	<div id="logo"><img src="images/thinksns.gif" width="260" height="80" border="0" alt="wekit" /></div>
 	<div id="version" class="rightheader">Version <?php echo $_TSVERSION; ?></div>
 </div>
 <div id='innercontent'>
-	<h1>ThinkSNS <?php echo $_TSVERSION, ' ', $i_message['install_wizard']; ?></h1>
+	<h1>$i_message['install_wizard']; ?></h1>
 <?php
 if (!$v)
 {
@@ -226,13 +225,13 @@ foreach ($writeable as $value)
 	echo '<p>'.$value.'</p>';
 }
 
-if (is_writable(THINKSNS_ROOT.$thinksns_config_file))
+if (is_writable(WEKIT_ROOT.$wekit_config_file))
 {
-	echo '<p>'.$thinksns_config_file.result(1, 0).'</p>';
+	echo '<p>'.$wekit_config_file.result(1, 0).'</p>';
 }
 else
 {
-	echo '<p>'.$thinksns_config_file.result(0, 0).'</p>';
+	echo '<p>'.$wekit_config_file.result(0, 0).'</p>';
 	$quit = TRUE;
 }
 ?>
@@ -682,10 +681,7 @@ elseif ($v == '6')
 }
 ?>
 </div>
-<div class='copyright'>ThinkSNS <?php echo $_TSVERSION; ?> &#169; copyright 2008-<?php echo date('Y') ?> www.ThinkSNS.com All Rights Reserved</div>
-</div>
-<div style="display:none;">
-<script src="http://s79.cnzz.com/stat.php?id=1702264&web_id=1702264" language="JavaScript" charset="gb2312"></script>
+<div class='copyright'> copyright 2008-<?php echo date('Y') ?> www.wekit.org All Rights Reserved</div>
 </div>
 </body>
 </html>

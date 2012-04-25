@@ -57,8 +57,6 @@ abstract class Action extends Think
 		$this->initUserApp();
 		$this->initAd();
 		$this->initFooterDocument();
-		//$this->initUcenter();
-
 		//控制器初始化
         if(method_exists($this,'_initialize'))
             $this->_initialize();

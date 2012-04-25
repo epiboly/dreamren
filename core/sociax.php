@@ -1,11 +1,7 @@
 <?php
-//前置缓存 规则待定
-
-//载入核心文件
-//记录开始运行时间
 $GLOBALS['_beginTime'] = microtime(TRUE);
 
-//核心路径定义
+
 if(!defined('SITE_PATH'))		define('SITE_PATH'	, dirname(getcwd()));
 if(!defined('CORE_PATH'))		define('CORE_PATH'	, SITE_PATH.'/core');
 if(!defined('APPS_PATH'))		define('APPS_PATH'	, SITE_PATH.'/apps');
@@ -13,9 +9,7 @@ if(!defined('ADDON_PATH'))		define('ADDON_PATH'	, SITE_PATH.'/addons');
 if(!defined('SITE_DATA_PATH'))	define('SITE_DATA_PATH'	, SITE_PATH.'/data');
 if(!defined('UPLOAD_PATH'))		define('UPLOAD_PATH'	, SITE_DATA_PATH.'/uploads');
 
-//应用路径解析
 if(isset($_GET['app'])){
-	//判断开放的应用列表，进行必要的应用名过滤
 	$app_name	=	strtolower(str_replace(array('/','\\'),'',strip_tags(urldecode($_GET['app']))));
 }else{
 	$app_name = 'home';
@@ -23,14 +17,10 @@ if(isset($_GET['app'])){
 
 if(!defined('APP_NAME'))			define('APP_NAME' , $app_name);
 if(!defined('APP_PATH'))			define('APP_PATH' , APPS_PATH.'/'.APP_NAME);
-
-//重新设定编译路径
 if(!defined('THINK_PATH'))			define('THINK_PATH' , CORE_PATH.'/ThinkPHP');
 if(!defined('RUNTIME_PATH'))		define('RUNTIME_PATH' , SITE_PATH.'/_runtime/~'.APP_NAME);
 if(!defined('RUNTIME_ALLINONE'))	define('RUNTIME_ALLINONE', true);
 
-// 创建运行时目录
-// 修改: 2011.06.01 为防止恶意的目录生成, 仅位于apps目录下的应用才生成缓存目录
 if (!is_dir(RUNTIME_PATH)) {
 	require_once SITE_PATH . '/addons/libs/Io/Dir.class.php';
 	$dirs    = new Dir(SITE_PATH.'/apps/');
