@@ -35,7 +35,7 @@ abstract class Action extends Think
 	protected	$app;
 	protected	$mid;
 	protected	$uid;
-	protected $ajaxData;
+	protected 	$ajaxData;
 
    /**
      +----------------------------------------------------------

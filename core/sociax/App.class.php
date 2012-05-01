@@ -144,8 +144,7 @@ class App
         if (is_file(CONFIG_PATH.strtolower(MODULE_NAME).'_config.php'))
             C(include CONFIG_PATH.strtolower(MODULE_NAME).'_config.php');
 
-		//Ucenter初始化
-		App::initUcenter();
+		
         // 用户认证
         App::checkUser();
         // 语言检查
@@ -467,31 +466,6 @@ class App
         return;
     }
 
-    /**
-     +----------------------------------------------------------
-     * Ucenter初始化
-     +----------------------------------------------------------
-     * @access private
-     +----------------------------------------------------------
-     * @return void
-     +----------------------------------------------------------
-     */
-	static private function initUcenter()
-	{
-		// 获取UCenter的应用列表
-		$filename = SITE_PATH . '/api/uc_client/uc_sync.php';
-
-		if (file_exists($filename)) {
-
-			require_once $filename;
-			if (UC_SYNC) {
-				unset($_ENV['app']);
-				global $ts;
-				$ts['ucenter']['app'] 			= uc_app_ls();
-				$ts['ucenter']['current_appid'] = UC_APPID;
-			}
-		}
-	}
     /**
      +----------------------------------------------------------
      * 用户访问权限验证

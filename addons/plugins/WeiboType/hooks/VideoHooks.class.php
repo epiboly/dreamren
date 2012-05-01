@@ -1,16 +1,6 @@
 <?php
 require_once('AbstractWeiboTypeHooks.class.php');
-/**
- * ImageHooks
- * 图片微博插件
- * 可以上传多张图片
- * @uses Hooks
- * @package
- * @version $id$
- * @copyright 2001-2013 SamPeng
- * @author SamPeng <penglingjun@zhishisoft.com>
- * @license PHP Version 5.2 {@link www.sampeng.org}
- */
+
 class VideoHooks extends AbstractWeiboTypeHooks
 {
     public $typeCode = 3;

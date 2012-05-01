@@ -24,9 +24,7 @@ class UserAction extends Action {
         Session::pause();
         global $ts;
 
-        //SamPeng 2011.12.15重构整个方法
         $install_app = $ts['install_apps'];
-
         $type  = h ( $_GET ['weibo_type'] );
         $weibo_config = model ( 'Xdata' )->lget ( 'weibo' );
 

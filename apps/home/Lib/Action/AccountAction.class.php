@@ -241,19 +241,7 @@ class AccountAction extends Action
 
     //帐号安全
     public function security() {
-    	// UCenter账号同步失败则重新设置
-    	if(UC_SYNC){
-    		global $ts;
-	    	$uc_user_ref = ts_get_ucenter_user_ref($this->mid);
-	    	if(!$uc_user_ref){
-	    		if(uc_user_checkname($ts['user']['uname']))$this->assign('uc_username',$ts['user']['uname']);
-	    		if(uc_user_checkemail($ts['user']['email']))$this->assign('uc_email',$ts['user']['email']);
-	    		$this->assign('set_ucenter_username',1);
-	    	}
-    	}
-
     	$this->setTitle(L('setting').' - '.L('account_safe'));
-
     	$this->display();
     }
 
@@ -332,15 +320,6 @@ class AccountAction extends Action
 		$map['password']	  = md5($_POST['oldpassword']);
 		S('S_userInfo_'.$this->mid,null);
     	if ( $dao->where($map)->find() ) {
-			include_once(SITE_PATH.'/api/uc_client/uc_sync.php');
-			if(UC_SYNC){
-				$ucenter_user_ref = ts_get_ucenter_user_ref($this->mid);
-				$uc_res = uc_user_edit($ucenter_user_ref['uc_username'],$_POST['oldpassword'],$_POST['password'],'');
-				if($uc_res == -8){
-					$this->error(L('userprotected_no_right'));
-				}
-			}
-    		//$_POST['password']    = md5($_POST['password']);
 			if ( $dao->where($map)->setField('password', md5($_POST['password'])) ) {
 				$this->success(L('save_success'));
 			}else {
@@ -419,31 +398,7 @@ EOD;
 
     // 设置UCenter账号
     public function doModifyUCenter() {
-    	include_once(SITE_PATH.'/api/uc_client/uc_sync.php');
-    	if(UC_SYNC){
-	    	$uc_user_ref = ts_get_ucenter_user_ref($this->mid);
-	    	if(!$uc_user_ref){
-	    		$username = $_POST['username'];
-	    		$email = $_POST['email'];
-	    		$password = $_POST['password'];
-	    		if(uc_user_checkname($username) != 1 || !isLegalUsername($username) || M('user')->where("uname='{$username}' AND uid<>{$this->mid}")->count())$this->error('用户名不合法或已经存在，请重新设置用户名');
-	    		if(uc_user_checkemail($email) != 1 || M('user')->where("uname='{$email}' AND uid<>{$this->mid}")->count())$this->error('Email不合法或已经存在，请重新设置Email');
-	    		global $ts;
-	    		if(md5($password) != $ts['user']['password'])$this->error(L('password_error_retype'));
-	    		$uc_uid = uc_user_register($username,$password,$email);
-	    		if($uc_uid>0){
-	    			ts_add_ucenter_user_ref($this->mid,$uc_uid,$username);
-					$this->assign('jumpUrl', U('home/Account/security'));
-					$this->success(L('ucenter_setting_success'));
-	    		}else{
-	    			$this->error(L('ucenter_setting_error'));
-	    		}
-	    	}else{
-	    		redirect(U('home/Account/security'));
-	    	}
-    	}else{
     		redirect(U('home/Account/security'));
-    	}
     }
 
     //积分规则

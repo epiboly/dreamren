@@ -1,14 +1,5 @@
 <?php
-/**
- * SpaceFollower
- * 个人空间的粉丝和关注列表插件
- * @uses VisitorAddons
- * @package
- * @version 1.0
- * @copyright 2001-2013 SamPeng
- * @author SamPeng <penglingjun@zhishisoft.com>
- * @license PHP Version 5.2
- */
+
 class SpaceFollowAddons extends SimpleAddons
 {
 	protected $version = '1.0';

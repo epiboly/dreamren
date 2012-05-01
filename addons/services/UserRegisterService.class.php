@@ -46,8 +46,7 @@ class UserRegisterService extends Service
 
         $this->_addUserToMyopLog($uid);
 
-        $this->_syncUCenter($uid, $email, $uname, $password);
-
+       
         return $uid;
     }
 
@@ -76,14 +75,7 @@ class UserRegisterService extends Service
 		return M('myop_userlog')->add($user_log);
     }
 
-    private function _syncUCenter($uid, $email, $uname, $password)
-    {
-        if (UC_SYNC) {
-			$uc_uid = uc_user_register($uname, $password, $email);
-			if ($uc_uid)
-				ts_add_ucenter_user_ref($uid, $uc_uid, $uname);
-		}
-    }
+
 
     public function run()
     {

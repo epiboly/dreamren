@@ -1,14 +1,4 @@
 <?php
-/**
- * SyncGroupWeiboAddons
- * 微博同步到我的群组
- * @uses SyncGroupWeiboAddons
- * @package
- * @version 1.0
- * @copyright 2001-2013 小川
- * @author 小川 <chenweichuan@zhishisoft.com>
- * @license PHP Version 5.2
- */
 class SyncGroupWeiboAddons extends SimpleAddons
 {
 	protected $version = '1.0';

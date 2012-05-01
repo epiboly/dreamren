@@ -1,14 +1,4 @@
 <?php
-
-/**
- * Lock
- * 对缓存文件进行锁操作
- * @package
- * @version $id$
- * @copyright 2001-2013 SamPeng
- * @author SamPeng <penglingjun@zhishisoft.com>
- * @license PHP Version 5.2 {@link www.sampeng.org}
- */
 class Lock
 {
     /**

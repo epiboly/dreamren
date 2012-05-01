@@ -346,9 +346,7 @@ class PublicAction extends Action{
 		        redirect(U('home/public/login',array('t'=>'unactive','email'=>$user['email'],'uid'=>$user['uid'])));
 		        exit;
 		    }
-			if(UC_SYNC && $result['reg_from_ucenter']){
-				$refer_url = U('home/Public/userinfo');
-			}elseif ( $_SESSION['refer_url'] != '' ) {
+			if ( $_SESSION['refer_url'] != '' ) {
 				//跳转至登录前输入的url
 				$refer_url	=	$_SESSION['refer_url'];
 				unset($_SESSION['refer_url']);
@@ -406,9 +404,7 @@ class PublicAction extends Action{
 			exit(json_encode($return));
 		}
 
-		if(UC_SYNC && $uc_user[0]){
-			$return['callback']	=	uc_user_synlogin($uc_user[0]);
-		}
+		
 		$return['message']	=	L('login_success');
 		$return['status']	=	1;
 
@@ -418,7 +414,7 @@ class PublicAction extends Action{
 	public function logout() {
 		service('Passport')->logoutLocal();
 		$this->assign('jumpUrl',U('home/index'));
-		$this->success(L('exit_success'). ( (UC_SYNC)?uc_user_synlogout():'' ) );
+		$this->success(L('exit_success') );
 	}
 
 	public function logoutAdmin() {
@@ -575,13 +571,7 @@ class PublicAction extends Action{
 		// 将邀请码设置已用
 		model('Invite')->setInviteCodeUsed($invite_code);
 
-		// 同步至UCenter
-		if (UC_SYNC) {
-			$uc_uid = uc_user_register($_POST['nickname'],$_POST['password'],$_POST['email']);
-			//echo uc_user_synlogin($uc_uid);
-			if ($uc_uid > 0)
-				ts_add_ucenter_user_ref($uid,$uc_uid,$data['uname']);
-		}
+		
 
 		if ($need_email_activate == 1) { // 邮件激活
 			$this->activate($uid, $_POST['email'], $invite_code);
@@ -882,16 +872,9 @@ EOD;
 
 	//检查Email地址是否合法
 	public function isValidEmail($email) {
-		if(UC_SYNC){
-			$res = uc_user_checkemail($email);
-			if($res == -4){
-				return false;
-			}else{
-				return true;
-			}
-		}else{
+		
 			return preg_match("/[_a-zA-Z\d\-\.]+@[_a-zA-Z\d\-]+(\.[_a-zA-Z\d\-]+)+$/i", $email) !== 0;
-		}
+		
 	}
 
 	//检查Email是否可用
@@ -900,12 +883,7 @@ EOD;
 		$email		 = empty($email) ? $_POST['email'] : $email;
 
 		$res = M('user')->where('`email`="'.$email.'"')->find();
-		if(UC_SYNC){
-			$uc_res = uc_user_checkemail($email);
-			if($uc_res == -5 || $uc_res == -6){
-				$res = true;
-			}
-		}
+		
 
 		if ( !$res ) {
 			if ($return_type === 'ajax') echo 'success';
@@ -923,13 +901,7 @@ EOD;
 		$return_type  = empty($name)  ? 'ajax' 		   			: 'return';
 		$name		  = empty($name)  ? t($_POST['nickname']) 	: $name;
 
-		if (UC_SYNC) {
-			$uc_res = uc_user_checkname($name);
-			if($uc_res == -1 || !isLegalUsername($name)){
-				if ($return_type === 'ajax') { echo L('username_rule');return; }
-				else return false;
-			}
-		} else if (!isLegalUsername($name)) {
+	   if (!isLegalUsername($name)) {
 			if ($return_type === 'ajax') { echo L('username_rule');return; }
 			else return false;
 		}
@@ -937,14 +909,10 @@ EOD;
 		if ($this->mid) {
 			$res = M('user')->where("uname='{$name}' AND uid<>{$this->mid}")->count();
 			$nickname = M('user')->getField('uname',"uid={$this->mid}");
-			if (UC_SYNC && ($uc_res == -2 || $uc_res == -3) && $nickname != $name) {
-				$res = 1;
-			}
+			
 		} else {
 			$res = M('user')->where("uname='{$name}'")->count();
-			if(UC_SYNC && ($uc_res == -2 || $uc_res == -3)){
-				$res = 1;
-			}
+			
 		}
 
 		if ( !$res ) {

@@ -1,25 +1,15 @@
 <?php
-/**
- * WeiboTypeAddons
- * 发布的微博类型插件
- * @uses NormalAddons
- * @package
- * @version $id$
- * @copyright 2001-2013 SamPeng
- * @author SamPeng <penglingjun@zhishisoft.com>
- * @license PHP Version 5.2 {@link www.sampeng.org}
- */
+
 class WeiboTypeAddons extends NormalAddons
 {
 	protected $version = "1.0";
-	protected $author  = "冷浩然,杨德升,陈伟川,彭灵俊";
-	protected $site    = "t.thinksns.com";
+	protected $author  = "黄卫立";
+	protected $site    = "www.wekit.org";
 	protected $info    = "控制发布微博的类型插件";
     protected $pluginName = "微博类型";
     protected $tsVersion = '2.5';
 
     public function getHooksInfo(){
-        //,'VideoHooks','MusicHooks','FileHooks'
         $hooks['list'] = array('PublicTypeHooks', 'ImageHooks', 'VideoHooks', 'MusicHooks','VoteHooks','BlogHooks');
         return $hooks;
     }

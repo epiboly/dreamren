@@ -1,14 +1,5 @@
 <?php
-/**
- * AbstractWeiboTypeHooks
- * 微博类型的抽象对象，完成公共抽象功能
- * @uses Hooks
- * @package
- * @version $id$
- * @copyright 2001-2013 SamPeng
- * @author SamPeng <penglingjun@zhishisoft.com>
- * @license PHP Version 5.2 {@link www.sampeng.org}
- */
+
 abstract class AbstractWeiboTypeHooks extends Hooks
 {
     const EMPTY_TYPE = 0;

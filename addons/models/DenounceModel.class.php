@@ -1,9 +1,5 @@
 <?php
-/**
- * 举报模型
- *
- * @author JunStar <wangjuncheng@zhishisoft.com>
- */
+
 class DenounceModel extends Model {
 	/**
 	 * [后台]获取相应类型的举报列表
