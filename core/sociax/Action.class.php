@@ -71,9 +71,6 @@ abstract class Action extends Think
      */
 	protected function initSite() {
 		$this->site	= $GLOBALS['ts']['site'];
-
-		// cnzz
-		getCnzz();
 	}
 
 	protected function api($name) {
@@ -282,24 +279,7 @@ abstract class Action extends Think
 		}
 	}
 
-	protected function initUcenter()
-	{
 
-		// 获取UCenter的应用列表
-
-		$filename = SITE_PATH . '/api/uc_client/uc_sync.php';
-
-		if (file_exists($filename)) {
-
-			require_once $filename;
-			if (UC_SYNC) {
-				unset($_ENV['app']);
-				global $ts;
-				$ts['ucenter']['app'] 			= uc_app_ls();
-				$ts['ucenter']['current_appid'] = UC_APPID;
-			}
-		}
-	}
 
    /**
      +----------------------------------------------------------

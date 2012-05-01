@@ -1,8 +1,6 @@
         <volist name="sync" id="v">
             <label>
-                <input type='checkbox' name='sync[]' value='{$v}' style="vertical-align:middle;" 
-                	<php>if($login_bind[$v]){</php>checked=true<php>}</php>
-                 id='{$v}_sync' onclick='loginSelectSync(this)' />
+                <input type='checkbox' name='sync[]' value='{$v}' style="vertical-align:middle;" <php>if($login_bind[$v]){</php>checked=true<php>}</php> id='{$v}_sync' onclick='loginSelectSync(this)' />
                 <span>{$alias[$v]}</span>
             </label>
         </volist>

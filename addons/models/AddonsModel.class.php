@@ -32,7 +32,7 @@ class AddonsModel extends Model
 				$addonCache = $this->_createAddonsCacheData($value['name'],$addonCache);
 			}
 		}
-		$res = F('thinksns_addon_list',$addonCache);
+		$res = F('wekit_addon_list',$addonCache);
 		return $addonCache;
 	}
 
@@ -83,7 +83,7 @@ class AddonsModel extends Model
 		$result = $this->where($map)->save($save);
 		if($result){
 			$addonCacheList = $this->resetAddonCache();
-			F('thinksns_addon_list',$addonCacheList);
+			F('wekit_addon_list',$addonCacheList);
 		}
 		return $result?true:false;
 	}
@@ -117,7 +117,7 @@ class AddonsModel extends Model
 
 		if($result){
 			$addonCacheList = $this->resetAddonCache();
-			F('thinksns_addon_list',$addonCacheList);
+			F('wekit_addon_list',$addonCacheList);
         }
 		return $result;
     }
@@ -134,7 +134,7 @@ class AddonsModel extends Model
 		$result = $this->where($map)->delete()?true:false;
 		if($result){
 			$addonCacheList = $this->resetAddonCache();
-			F('thinksns_addon_list',$addonCacheList);
+			F('wekit_addon_list',$addonCacheList);
 		}
 		return $result;
     }
@@ -154,15 +154,9 @@ class AddonsModel extends Model
 		$data = array();
 		foreach($valid as $value){
 			$obj = $this->fileAddons[$value['name']];
-			//$type = $obj instanceof AddonsAdminInterface;
-			//$class = new ReflectionClass($obj);
-			//$methods = $class->getMethods();
-			//$methods = getSubByKey($methods,'name');
+			
 			if($obj && $obj->adminMenu()){
 				$data[] = array($value['pluginName'], $value['addonId']);
-				//if(!$obj->adminMenu()){
-				//	throw new ThinkException($value['pluginName'].' 必须具备管理面板,但是我没看到adminMenu');
-				//}
 			}
 		}
 		return $data;

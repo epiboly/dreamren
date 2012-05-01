@@ -68,7 +68,7 @@ class VideoHooks extends AbstractWeiboTypeHooks
     {
         $link = t($_POST['url']);
         $parseLink = parse_url($link);
-        if(preg_match("/(youku.com|youtube.com|5show.com|ku6.com|sohu.com|mofile.com|sina.com.cn|tudou.com)$/i", $parseLink['host'], $hosts)) {
+        if(preg_match("/(youku.com|youtube.com|ku6.com|sohu.com|mofile.com|sina.com.cn|tudou.com)$/i", $parseLink['host'], $hosts)) {
             $return['boolen'] = 1;
             $return['data']   = getShortUrl($link);
         }else{
@@ -77,7 +77,7 @@ class VideoHooks extends AbstractWeiboTypeHooks
         }
 
         $flashinfo = $this->_video_getflashinfo($link, $hosts[1]);
-
+		//dump($flashinfo);
         $return['data'] = $flashinfo['title'].$return['data'];
         $return['publish_type'] = $this->typeCode;
 
@@ -85,15 +85,17 @@ class VideoHooks extends AbstractWeiboTypeHooks
 
     }
 
+	//此代码需要持续更新.视频网站有变动.就得修改代码.
     private function _video_getflashinfo($link, $host)
     {
         $return='';
         $content = file_get_contents("compress.zlib://".$link);//获取
         if('youku.com' == $host)
         {
-            preg_match('/http:\/\/v\.t\.sina\.com\.cn\/share\/share\.php\?[^"]+/i', $content, $share_url);
+			// 2012/3/7 修复优酷链接图片的获取
+            preg_match('/http:\/\/profile\.live\.com\/badge\/\?[^"]+/i', $content, $share_url);
             preg_match('/id\_(\w+)\.html/', $share_url[0], $flashvar);
-            preg_match('/pic=([^"&]+)/', $share_url[0], $img);
+            preg_match('/screenshot=([^"&]+)/', $share_url[0], $img);
             preg_match('/title=([^"&]+)/', $share_url[0], $title);
             if (!empty($title[1])) {
                 $title[1] = urldecode($title[1]);
@@ -103,19 +105,23 @@ class VideoHooks extends AbstractWeiboTypeHooks
         }
         elseif('ku6.com' == $host)
         {
-            preg_match("/\/([\w\-]+)\.html/",$link,$flashvar);
-            preg_match("/<span class=\"s_pic\">(.*?)<\/span>/i",$content,$img);
+			// 2012/3/7 修复ku6链接和图片抓去
+            preg_match("/\/([\w\-\.]+)\.html/",$link,$flashvar);
+			//preg_match("/<span class=\"s_pic\">(.*?)<\/span>/i",$content,$img);
+			preg_match("/cover: \"(.+?)\"/i", $content, $img);
             preg_match("/<title>(.*?)<\/title>/i",$content,$title);
             $title[1] = iconv("GBK","UTF-8",$title[1]);
         }
         elseif('sina.com.cn' == $host)
         {
+			// 2012/3/7 验证OK
             preg_match("/vid=(.*?)\/s\.swf/",$content,$flashvar);
             preg_match("/pic\:[ ]*\'(.*?)\'/i",$content,$img);
             preg_match("/<title>(.*?)<\/title>/i",$content,$title);
         }
         elseif('tudou.com' == $host)
         {
+			// 2012/3/7 验证OK
         	//土豆视频解析修改　　editby: nonant 2012-1-19 参考了记事狗解析正则.
 			if(preg_match('~(?:(?:[\?\&\#]iid\=)|(?:\d+i))(\d+)~',$link,$defaultIid) )
 			{
@@ -124,7 +130,7 @@ class VideoHooks extends AbstractWeiboTypeHooks
 			{
 				$defaultIid = $defaultIid[1];
 			}
-			
+
 			if( $defaultIid ){
 				preg_match('~'.$defaultIid.'.*?icode\s*[\:\=]\s*[\"\']([\w\d\-\_]+)[\"\']~s',$content,$flashvar);
 				preg_match('~'.$defaultIid.'.*?title\s*[\:\=]\s*[\"\']([^\"\']+?)[\"\']~s',$content,$title);
@@ -133,10 +139,10 @@ class VideoHooks extends AbstractWeiboTypeHooks
 			}
         }
         elseif('youtube.com' == $host) {
-
-        }
-        elseif('5show.com' == $host) {
-
+			// 2012/3/7增加youtube支持
+			preg_match('/http:\/\/www.youtube.com\/watch\?v=([^\/&]+)&?/i',$link,$flashvar);
+            preg_match("/<link itemprop=\"thumbnailUrl\" href=\"(.*?)\">/i", $content, $img);
+            preg_match("/<title>(.*?)<\/title>/", $content, $title);
         }
         elseif('sohu.com' == $host) {
             preg_match("/vid=\"(.*?)\"/", $content, $flashvar);

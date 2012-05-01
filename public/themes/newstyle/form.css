@@ -5,7 +5,7 @@
 /*共用按钮*/
 .btn_b,.btn_w,.btn_big,.btn_big:hover,.btn_big_disable,.btn_big_after,.add_atn,.btn_relation,.btn_relation2,.add_atn_small,.btn_relation_small,.btn_relation span,.btn_relation2 span,.btn_b_disable,.btn_green,.so_btn,.btn_green_w121,.btn_reg,.btn_b_disable,.btn_group,.btn_create,.btn_download,.btn_search_big,.btn_upload_file{background: url(images/btn.gif) no-repeat left top;display: inline-block}
 .btn_b,a.btn_b:link,a.btn_b:hover,a.btn_b:visited{font-size: 12px;height: 26px;width:60px;border:0 none;line-height: 26px;text-align:center;padding:0;text-decoration:none;color:#fff}
-.btn_w,a.btn_w,a.btn_w:hover{font-size: 12px;height: 27px;width:60px;border:0 none;line-height: 27px;text-align:center;padding:0;text-decoration:none;color:#333}
+.btn_w,a.btn_w,a.btn_w:hover{font-size: 12px;height: 26px;width:60px;border:0 none;line-height: 26px;text-align:center;padding:0;text-decoration:none;color:#333}
 .btn_big{background-position:0 -54px;height:28px;width:80px;border:0;position:absolute;top:0;right:0}
 .btn_big:hover{background-position:0 -83px}
 .btn_big_disable{background-position:-90px -141px;height:67px;width:80px;border:0;float:right}
@@ -26,7 +26,7 @@ a.btn_create{color:#fff}
 .btn_download{background-position:left -516px;width:160px;height:41px}/*下载按钮*/
 .btn_search_big{background-position:left -601px;width:71px;height:36px;border:0}
 .btn_relation{background-position:right -238px;height:28px;line-height:26px;padding-right:10px;_padding_right:5px;float:left;margin-left:23px;_margin-left:11px;font-size:12px}
-.btn_relation span{background-position:left -238px;height:28px;display:inline-block;line-height:26px;padding-left:23px;color:#999;font-size:12px}
+.btn_relation span{background-position:left -238px;height:28px;display:inline-block;line-height:26px;padding-left:19px;color:#999;font-size:12px}
 .btn_relation2{background-position:right -238px;margin-left:18px;_margin-left:9px;font-size:12px}
 .btn_relation2 span{background-position:0 -238px}
 a.top_stick, a.top_stick:hover, a.top_stick:active, a.top_stick:visited 
@@ -34,7 +34,7 @@ a.top_stick, a.top_stick:hover, a.top_stick:active, a.top_stick:visited
 width:36px}
 .BtnShare, a.BtnShare {font-size: 12px;background: url(images/bg_Share.gif) no-repeat 0px center;width: 54px;display: inline-block;color:#339900;height: 21px;line-height:21px;margin-top:3px;border: 0px none;text-align: left;padding-left: 5px;cursor:pointer}
 .add_atn{background-position:0 -209px;height:26px;line-height:26px;*line-height:29px;width:57px;display:inline-block;padding-left:30px}
-a.add_atn,a.add_atn:visited{color:#fff;font-size:12px}
+a.add_atn:link,a.add_atn:visited{color:#fff;font-size:12px}
 a.add_atn:hover{text-decoration:none}
 .so_btn{background-position:-98px -55px;*background-position:-98px -55px;border:0 none;height:24px;width:24px;background-color:#fff;position:absolute;right:0;top:0}
 .so_btn:hover{background-color:#F0F4F7}

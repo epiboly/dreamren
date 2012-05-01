@@ -1,9 +1,9 @@
-<?php 
+<?php
 require_once(SITE_PATH.'/apps/weibo/Lib/Model/WeiboModel.class.php');
 class WeiboApiModel extends WeiboModel
 {
 	var $tableName = 'weibo';
-	
+
 	//获取最新更新的公共微博消息
 	public function public_timeline($since_id, $max_id, $count = 20, $page = 1)
 	{
@@ -16,22 +16,21 @@ class WeiboApiModel extends WeiboModel
 		}
 		$map['isdel'] = 0;
 		$list = $this->where($map)->limit($limit)->order('weibo_id DESC')->findAll();
-		
+
 		$this->_doWeiboAndUserCache($list);
-		
+
 		$weibo_ids = getSubByKey($list, 'weibo_id');
 		foreach ($list as $k => $v)
 			$result[$k] = $this->getOneApi('', $v);
-		
+
     	return $result;
 	}
-	
+
 	//获取当前用户所关注用户的最新微博信息
 	public function friends_timeline($uid, $since_id, $max_id, $count = 20, $page = 1)
 	{
 		$limit = ($page-1) * $count . ',' . $count;
 		$now_following_sql = D('Follow', 'weibo')->getNowFollowingSql($uid);
-		
 		$map['type'] = array('IN', array('1','0'));
 		if ($since_id) {
 			$map['weibo_id'] = array('gt', $since_id);
@@ -39,12 +38,13 @@ class WeiboApiModel extends WeiboModel
 			$map['weibo_id'] = array('lt', $max_id);
 		}
 		$map['isdel'] = 0;
-		$map['uid']   = array('exp', "IN ( {$now_following_sql} ) OR `uid` = '{$uid}'");
-		
+		//没有关注任何人时,不进行查询
+		$followCount = D('Follow','weibo')->getUserFollowCount($uid);
+		if($followCount)
+			$map['uid']   = array('exp', "IN ( {$now_following_sql} ) OR `uid` = '{$uid}'");
+
 		$list = $this->where($map)->limit($limit)->order('weibo_id DESC')->findAll();
-		
 		$this->_doWeiboAndUserCache($list);
-    	
 		$weibo_ids = getSubByKey($list, 'weibo_id');
 		foreach($list as $k => $v) {
 			$v['favorited'] = D('Favorite','weibo')->isFavorited($v['weibo_id'], $uid, $weibo_ids);
@@ -52,7 +52,7 @@ class WeiboApiModel extends WeiboModel
 	    }
     	return $result;
 	}
-		
+
 	//获取用户发布的微博信息列表
 	public function user_timeline($uid, $uname, $since_id, $max_id, $count = 20, $page = 1)
 	{
@@ -70,9 +70,9 @@ class WeiboApiModel extends WeiboModel
 		$map['isdel'] = 0;
 		$map['uid']   = $uid;
 		$list = $this->where($map)->limit($limit)->order('weibo_id DESC')->findAll();
-		
+
 		$this->_doWeiboAndUserCache($list);
-		
+
 		$weibo_ids = getSubByKey($list, 'weibo_id');
 		foreach($list as $k => $v) {
 			$v['favorited'] = D('Favorite','weibo')->isFavorited($v['weibo_id'], $uid, $weibo_ids);
@@ -80,7 +80,7 @@ class WeiboApiModel extends WeiboModel
 	    }
     	return $result;
 	}
-	
+
 	//获取@当前用户的微博列表
 	public function mentions($uid, $since_id, $max_id, $count = 20, $page = 1)
 	{
@@ -92,9 +92,9 @@ class WeiboApiModel extends WeiboModel
 			$map.= " AND weibo_id < $max_id";
 		}
 		$list = $this->where("$map AND (weibo_id IN (SELECT weibo_id FROM {$this->tablePrefix}weibo_atme WHERE uid=$uid))")->order('weibo_id DESC')->limit($limit)->findAll();
-		
+
 		$this->_doWeiboAndUserCache($list);
-		
+
 		$weibo_ids = getSubByKey($list, 'weibo_id');
 		foreach($list as $k=>$v){
 			$v['favorited'] = D('Favorite','weibo')->isFavorited($v['weibo_id'], $uid, $weibo_ids);
@@ -102,7 +102,7 @@ class WeiboApiModel extends WeiboModel
 	    }
     	return $result;
 	}
-	
+
 	//获取评论列表
     public function getCommentList($uid, $type = 'all', $since_id, $max_id, $count = 20, $page = 1)
     {
@@ -141,7 +141,7 @@ class WeiboApiModel extends WeiboModel
     	}
     	return $list;
     }
-    
+
     //获取API评论
     function comments($id,$since_id,$max_id,$count=20,$page=1){
         $limit = ($page-1)*$count.','.$count;
@@ -160,7 +160,7 @@ class WeiboApiModel extends WeiboModel
     	}
     	return $list;
     }
-    
+
     //获取用户关注的列表
     function following($uid,$uname,$since_id,$max_id,$count=20,$page=1){
     	$limit = ($page-1)*$count.','.$count;
@@ -172,10 +172,10 @@ class WeiboApiModel extends WeiboModel
 			$map['follow_id'] = array('gt',$since_id) ;
 		}elseif ($max_id){
 			$map['follow_id'] = array('lt',$max_id);
-		}		
+		}
 		$map['uid']=$uid;
 		$list = M('weibo_follow')->where($map)->limit($limit)->field('fid as uid,follow_id as id')->order('follow_id DESC')->findAll();
-		
+
 		$uids = getSubByKey($list, 'uid');
 		D('User', 'home')->setUserObjectCache($uids);
 		model('UserCount')->setUserFollowerCount($uids);
@@ -187,13 +187,13 @@ class WeiboApiModel extends WeiboModel
 			}else{
 				$list[$k]['user'] = getUserInfo($v['uid'], '', $uid);
 			}
-			
+
 			$mini = $this->where('uid='.$v['uid'].' AND isdel=0')->order('weibo_id DESC')->find();
 			$list[$k]['weibo'] = $this->getOneApi('', $mini);
 		}
 		return $list;
     }
-    
+
     //获取用户粉丝列表
     function followers($uid,$uname,$since_id,$max_id,$count=20,$page=1){
     	$limit = ($page-1)*$count.','.$count;
@@ -205,11 +205,11 @@ class WeiboApiModel extends WeiboModel
 			$map['follow_id'] = array('gt',$since_id) ;
 		}elseif ($max_id){
 			$map['follow_id'] = array('lt',$max_id);
-		}		
+		}
 		$map['fid']  = $uid;
 		$map['type'] = 0;
 		$list = M('weibo_follow')->where($map)->limit($limit)->field('uid,follow_id as id')->order('follow_id DESC')->findAll();
-		
+
 		$uids = getSubByKey($list, 'uid');
 		D('User', 'home')->setUserObjectCache($uids);
 		model('UserCount')->setUserFollowerCount($uids);
@@ -226,7 +226,7 @@ class WeiboApiModel extends WeiboModel
 		}
 		return $list;
     }
-    
+
     //搜索微博（话题)
     function search($key,$since_id,$max_id,$count=20,$page=1){
     	$key=t($key);
@@ -246,8 +246,8 @@ class WeiboApiModel extends WeiboModel
 	    unset($list);
 		return $result;
     }
-    
-    
+
+
     //搜索用户
     function searchUser($key,$mid,$since_id,$max_id,$count=20,$page=1){
     	$key=t($key);
@@ -270,7 +270,7 @@ class WeiboApiModel extends WeiboModel
     	}
     	return $list;
     }
-    
+
 }
 
 ?>

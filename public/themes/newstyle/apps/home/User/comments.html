@@ -7,6 +7,12 @@
   <div class="main">
     <div class="mainbox">
       <div class="mainbox_R">
+	    <volist name="ts['ad']['right_top']" id="vo">
+		<div class="setskinbox lineS_btm">
+			{$vo['content']}
+		</div>
+		</volist>
+	    {:Addons::hook('home_index_right_top')}
         {:W('RelatedUser',array('async'=>1))}
         <div class="right_box">
           <h2><a href="javascript:void(0)" onclick="$('.quick_win').show()" class="right" style="font-weight:400;font-size:12px">添加</a>关注的话题</h2>

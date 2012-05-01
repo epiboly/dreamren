@@ -296,7 +296,12 @@ class FollowModel extends Model{
 		if( $operate == 'following' ){ //关注
 			if(is_numeric($gid) && $type==0){
 				if($gid == 0){
-					$list = $this->where("uid={$uid} AND type={$type} ")->order('follow_id DESC')->findpage($limit);
+//					$list = $this->where("uid={$uid} AND type={$type} ")->order('follow_id DESC')->findpage($limit);
+					$list = $this->Table("{$this->tablePrefix}{$this->tableName} AS follow LEFT JOIN {$this->tablePrefix}weibo_follow_group_link AS link ON link.follow_id = follow.follow_id")
+								 ->field('follow.*')
+								 ->where("follow.uid={$uid} AND follow.type={$type} AND link.follow_id IS NULL")
+								 ->order('follow.uid DESC')
+								 ->findPage($limit);
 				}else{
 					$list = $this->field('follow.*')
 							 ->table("{$this->tablePrefix}weibo_follow_group_link AS link LEFT JOIN {$this->tablePrefix}{$this->tableName} AS follow ON link.follow_id=follow.follow_id AND link.uid=follow.uid")
@@ -386,7 +391,7 @@ class FollowModel extends Model{
 	 * return 1:我关注他,2:他关注我,3互相关注
 	 */
 	public function getStateByArr($uid,$followArr){
-		$list = M('weibo_follow')->where(" ( uid = '{$uid} and fid in(".implode(',',$followArr).") ') OR ( uid in(".implode(',',$followArr).") and fid = '{$uid}')")->findAll();
+		$list = M('weibo_follow')->where(" ( uid = '{$uid}' and fid in(".implode(',',$followArr).") ) OR ( uid in(".implode(',',$followArr).") and fid = '{$uid}')")->findAll();
 		$data = array();
 		foreach($list as $v){
 			if($v['uid'] == $uid){	//我关注他

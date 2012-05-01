@@ -31,7 +31,7 @@ class LocalShortUrlHooks
 
 		//查询数据库中的ID
 		if($result = M('Url')->where(array('hash'=>$hash))->find()){
-			$url_id	=	$this->getEncodeNum($result['id']);
+			$url_id	=	intval($result['id']);
 		}else{
 			//插入新的url
 			$map['url']	=	$url;
@@ -41,7 +41,6 @@ class LocalShortUrlHooks
 		}
 
 		if(!$url_id) return $url;
-
 		//url前缀
 		if(!$localUrl){
 			$prefix = SITE_URL;

@@ -20,8 +20,7 @@ function loadEditor(textareaId) {
 
     KISSY.use('editor', function() {
         var KE = KISSY.Editor;
-        var EDITER_UPLOAD = "{:U('home/Attach/kissy')}";
-       
+        var EDITER_UPLOAD = "<?php echo U('home/Attach/kissy'); ?>";
         //编辑器内弹窗 z-index 底限，防止互相覆盖
         KE.Config.baseZIndex = 10000;
         var cfg = {
@@ -32,8 +31,7 @@ function loadEditor(textareaId) {
                 "image":{
                     upload:{
                         serverUrl:EDITER_UPLOAD,
-                        surfix:"png,jpg,jpeg,gif,bmp",
-                        sizeLimit:"{$_editor_size_limit}" // K
+                        surfix:"png,jpg,jpeg,gif,bmp",sizeLimit:'<?php echo $_editor_size_limit; ?>'
                     }
                 },
                 "flash":{
@@ -47,8 +45,7 @@ function loadEditor(textareaId) {
         };
 
         _KISSY_[textareaId] = KE("#"+textareaId, cfg);
-        _KISSY_[textareaId].use(
-            "font,link,image,flash,xiami-music,smiley");
+        _KISSY_[textareaId].use("font,link,image,flash,xiami-music,smiley");
     });
 }
 

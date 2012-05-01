@@ -87,19 +87,14 @@
 		$reply_content.focus();
 	}
 
-	var replyIng = false;
+	
     function doReply() {
-    	if(replyIng == true){
-    		return ;
-    	}
-    	replyIng = true;
         var reply_content = $('#reply_content').val();
         if ('' == reply_content) {
         	ui.error('{:L('Empty_Content')}');
         	return false;
         }
         $.post("{:U('home/Message/doReply')}", {id:list_id, reply_content:reply_content}, function(res){
-        	replyIng = false;
             if(res == '1') {
                 $('#reply_content').val('');
                 load_new_message();

@@ -133,7 +133,7 @@ class ValidationService extends Service{
 	 * @return string
 	 */
 	private function __generateCode($id) {
-		return md5($id.'thinksns#^!@*#%^!@#');
+		return md5($id.'wekit#^!@*#%^!@#');
 	}
 
  	/**

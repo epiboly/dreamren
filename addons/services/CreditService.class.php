@@ -1,12 +1,5 @@
 <?php
-/**
- * 积分服务
- * 
- * 提供积分获取、积分设置等服务
- * 
- * @author thinksns
- *
- */
+
 class CreditService extends Service {
 	//所有设置的值
 	var $info;

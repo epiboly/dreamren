@@ -1,8 +1,4 @@
 <?php
-/*
- * tThinkSNS 安装文件,修改自pbdigg.
- */
-
 error_reporting(0);
 session_start();
 define('WEKIT_INSTALL', TRUE);
@@ -48,11 +44,11 @@ if (!get_magic_quotes_gpc())
 <body>
 <div id='content'>
 <div id='pageheader'>
-	<div id="logo"><img src="images/thinksns.gif" width="260" height="80" border="0" alt="wekit" /></div>
+	<div id="logo"><img src="images/wekit.gif" width="260" height="80" border="0" alt="wekit" /></div>
 	<div id="version" class="rightheader">Version <?php echo $_TSVERSION; ?></div>
 </div>
 <div id='innercontent'>
-	<h1>$i_message['install_wizard']; ?></h1>
+	<h1><?php echo $i_message['install_wizard']; ?></h1>
 <?php
 if (!$v)
 {
@@ -235,7 +231,7 @@ else
 	$quit = TRUE;
 }
 ?>
-<!-- <span class='red'><?php echo $i_message['install_dirmod'];?></span> -->
+<span class='red'><?php echo $i_message['install_dirmod'];?></span>
 </div>
 <p class="center">
 	<form method="post" action='install.php?v=3'>
@@ -263,12 +259,12 @@ elseif ($v == '3')
 <p><input type="password" name="db_password" value="" size="40" class='input' /></p>
 
 <h5><?php echo $i_message['install_mysql_name'];?></h5>
-<p><input type="text" name="db_name" value="thinksns_2_5" size="40" class='input' />
+<p><input type="text" name="db_name" value="wekit" size="40" class='input' />
 </p>
 
 <h5><?php echo $i_message['install_mysql_prefix'];?></h5>
 <p><?php echo $i_message['install_mysql_prefix_intro'];?></p>
-<p><input type="text" name="db_prefix" value="ts_" size="40" class='input' /></p>
+<p><input type="text" name="db_prefix" value="wk_" size="40" class='input' /></p>
 
 <h5><?php echo $i_message['site_url'];?></h5>
 <p><?php echo $i_message['site_url_intro'];?></p>
@@ -428,7 +424,7 @@ elseif ($v == '4')
 
 <?php
 //写配置文件
-$fp = fopen(THINKSNS_ROOT.$thinksns_config_file, 'wb');
+$fp = fopen(WEKIT_ROOT.$wekit_config_file, 'wb');
 $configfilecontent = <<<EOT
 <?php
 if (!defined('SITE_PATH')) exit();
@@ -445,10 +441,10 @@ return array(
 	'DB_CHARSET'		=>	'utf8',				// 数据库编码
 	'DB_FIELDS_CACHE'	=>	true,				// 启用字段缓存
 
-	//'COOKIE_DOMAIN'	=>	'.thinksns.com',	//cookie域,请替换成你自己的域名 以.开头
+	//'COOKIE_DOMAIN'	=>	'.wekit.com',	//cookie域,请替换成你自己的域名 以.开头
 
 	//Cookie加密密码
-	'SECURE_CODE'       =>  'SECURE_TEST',
+	'SECURE_CODE'       =>  'SECURE_WEKIT',
 
 	// 默认应用
     'DEFAULT_APPS'		=> array('api', 'admin', 'home', 'myop', 'weibo', 'wap', 'w3g'),
@@ -457,15 +453,15 @@ return array(
 	'URL_ROUTER_ON'		=> false,
 
     // 是否开启调试模式 (开启AllInOne模式时该配置无效, 将自动置为false)
-	'APP_DEBUG'			=> false,
+	'APP_DEBUG'			=> true,
 );
 EOT;
-$configfilecontent = str_replace('SECURE_TEST','SECURE'.rand(10000,20000),$configfilecontent);
-chmod(THINKSNS_ROOT.$thinksns_config_file, 0777);
+$configfilecontent = str_replace('SECURE_WEKIT','SECURE'.rand(10000,20000),$configfilecontent);
+chmod(WEKIT_ROOT.$wekit_config_file, 0777);
 $result_1	=	fwrite($fp, trim($configfilecontent));
 @fclose($fp);
 
-if($result_1 && file_exists(THINKSNS_ROOT.$thinksns_config_file)){
+if($result_1 && file_exists(WEKIT_ROOT.$wekit_config_file)){
 ?>
 	<p><?php echo $i_message['config_log_success']; ?></p>
 <?php
@@ -526,9 +522,9 @@ elseif ($v == '5')
 
 			if( intval($link[0]) > 0 )
 			{
-				$thinksns_rebuild	=	true;
-				$msg .= '<p>'.$i_message['thinksns_rebuild'].'</p>';
-				$alert = ' onclick="return confirm(\''.$i_message['thinksns_rebuild'].'\');"';
+				$wekit_rebuild	=	true;
+				$msg .= '<p>'.$i_message['wekit_rebuild'].'</p>';
+				$alert = ' onclick="return confirm(\''.$i_message['wekit_rebuild'].'\');"';
 			}
 		}
 	}
@@ -546,9 +542,9 @@ else
 ?>
 <div class="botBorder">
 <?php
-if($thinksns_rebuild){
+if($wekit_rebuild){
 ?>
-<p style="color:red;font-size:16px;"><?php echo $i_message['thinksns_rebuild'];?></p>
+<p style="color:red;font-size:16px;"><?php echo $i_message['wekit_rebuild'];?></p>
 <?php
 }
 ?>
@@ -589,7 +585,7 @@ elseif ($v == '6')
 <?php
 	$db_charset	=	$db_config['db_charset'];
 	$db_prefix	=	$db_config['db_prefix'];
-	$sql = str_replace("\r", "\n", str_replace('`'.'ts_', '`'.$db_prefix, $sql));
+	$sql = str_replace("\r", "\n", str_replace('`'.'wk_', '`'.$db_prefix, $sql));
 	foreach(explode(";\n", trim($sql)) as $query)
 	{
 		$query = trim($query);

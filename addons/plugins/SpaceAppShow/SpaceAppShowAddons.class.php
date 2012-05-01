@@ -2,11 +2,11 @@
 class SpaceAppShowAddons extends SimpleAddons
 {
 	protected $version = '1.0';
-	protected $author  = '陈伟川';
-	protected $site    = 'http://weibo.com/cchhuuaann';
+	protected $author  = '黄卫立';
+	protected $site    = 'http://www.wekit.org';
 	protected $info    = '个人主页应用展示';
 	protected $pluginName = '个人主页应用展示';
-	protected $tsVersion  = "2.5";                               // ts核心版本号
+	protected $tsVersion  = "1.0";                               // ts核心版本号
 
 
 	private static $validApps = array(

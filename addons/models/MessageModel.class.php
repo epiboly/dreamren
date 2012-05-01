@@ -37,13 +37,13 @@ class MessageModel extends Model
                 ->where("`mb`.`member_uid`={$uid} AND `li`.`type`{$type}")
                 ->order('`mb`.`new` DESC,`mb`.`list_ctime` DESC')
                 ->findPage();
-        $this->_parseMessageList(& $list['data'], $uid); // 引用
+        $this->_parseMessageList( $list['data'], $uid); // 引用
         return $list;
     }
 
-    private function _parseMessageList(& $list, $current_uid)
+    private function _parseMessageList( $list, $current_uid)
     {
-        foreach ($list as & $v) {
+        foreach ($list as  $v) {
             $v['last_message'] = unserialize($v['last_message']);
             $v['last_message']['to_uid'] = $this->_parseToUidByMinMax($v['min_max'], $v['last_message']['from_uid']);
         }
@@ -78,9 +78,9 @@ class MessageModel extends Model
                 ->order('`mb`.`new` DESC,`mb`.`list_id` DESC')
                 ->limit($limit)
                 ->findAll();
-        $this->_parseMessageList(& $list, $uid); // 引用
+        $this->_parseMessageList( $list, $uid); // 引用
 
-        foreach ($list as & $_l) {
+        foreach ($list as  $_l) {
             $_l['from_uid'] = $_l['last_message']['from_uid'];
             $_l['content']  = $_l['last_message']['content'];
             $_l['mtime']    = $_l['list_ctime'];

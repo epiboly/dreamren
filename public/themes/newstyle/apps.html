@@ -1,5 +1,7 @@
-{:Addons::hook('home_index_left_top')}
+   {:Addons::hook('home_index_left_top_outline')}
 <div class="user_app"><!-- 用户组件列表 begin -->
+    {:Addons::hook('home_index_left_top')}
+
 	<div class="user_app_top"></div>
     <div class="user_app_box">
   <div class="userinfo">
@@ -70,35 +72,7 @@
     </div>
 
     {:Addons::hook('home_index_left_middle')}
-    
-    <!--应用-文涛修改
-    <div class="user_app_list app_line">
-        <ul>
-        <?php foreach ($ts['user_app'] as $_temp_type => $_temp_apps) { ?>
-        <?php foreach ($_temp_apps as $_temp_app) { ?>
-            <li>
-                <?php if(!$ts['site']['site_appalias_wordwrap']) $_temp_app['app_alias'] = mb_substr($_temp_app['app_alias'],0,4,'UTF8'); ?>
-                <?php if($_temp_type == 'local_app' || $_temp_type == 'local_default_app') { ?>
-                <a href="<?php echo $_temp_app['app_entry'];?>" class="a14">
-                    <img src="<?php echo $_temp_app['icon_url'];?>" />
-                    <?php echo $_temp_app['app_alias'];?>
-                </a>
-                <?php }else { ?>
-                <a href="__ROOT__/apps/myop/userapp.php?id=<?php echo $_temp_app['app_id'];?>" class="a14">
-                    <img src="http://appicon.manyou.com/icons/<?php echo $_temp_app['app_id'];?>" />
-                    <?php echo $_temp_app['app_alias'];?>
-                </a>
-                <?php }?>
-            </li>
-        <?php } ?>
-        <?php } ?>
-        </ul>
-    </div>
-    <div class="app_add app_line">
-    <span class="right"><span class="ico_app_manage"></span><a href="{:U('home/Index/editapp')}">管理应用</a></span>
-    <span><span class="ico_app_add"></span><a href="{:U('home/Index/addapp')}">添加应用</a></span>
-    </div>
-    -->
+
     </div>
 	<div class="user_app_btm"></div>
     {:Addons::hook('home_index_left_bottom')}

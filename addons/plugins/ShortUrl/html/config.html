@@ -4,16 +4,14 @@
     	<dt>启用的短网址服务：</dt>
     	<dd>
 			<input type="radio" name="shorturlapi" value="0" <eq name="shorturlapi" value="0">checked=checked</eq> />关闭		
-			<input type="radio" name="shorturlapi" value="sina" <eq name="shorturlapi" value="sina">checked=checked</eq> />t.cn
-			<input type="radio" name="shorturlapi" value="bitly" <eq name="shorturlapi" value="bitly">checked=checked</eq> />bit.ly
-			<input type="radio" name="shorturlapi" value="google" <eq name="shorturlapi" value="google">checked=checked</eq> />goo.gl
-			<input type="radio" name="shorturlapi" value="baidu" <eq name="shorturlapi" value="baidu">checked=checked</eq> />dwz.cn
-			<input type="radio" name="shorturlapi" value="local" <eq name="shorturlapi" value="local">checked=checked</eq> />本地URL
-			<p>请对照相应选项，填写正确的apikey</p>
     	</dd>
     </dl>
     <dl class="lineD">
-    	<dt>t.cn AppKey：</dt>
+		<dt>使用t.cn</dt>
+    	<dd>
+			<input type="radio" name="shorturlapi" value="sina" <eq name="shorturlapi" value="sina">checked=checked</eq> /> http://t.cn/xxx
+    	</dd>
+    	<dt>配置AppKey：</dt>
     	<dd>
 			<input type="text" name="sinakey" value="{$sinakey}" style="width:400px" />
 			<p>请输入新浪应用的AppKey</p>
@@ -22,11 +20,15 @@
     	</dd>
     </dl>
     <dl class="lineD">
-    	<dt>bit.ly Login：</dt>
+    	<dt>使用bit.ly</dt>
+    	<dd>
+			<input type="radio" name="shorturlapi" value="bitly" <eq name="shorturlapi" value="bitly">checked=checked</eq> /> http://bit.ly/xxx
+    	</dd>
+		<dt>配置Login：</dt>
     	<dd>
 			<input type="text" name="bitlylogin" value="{$bitlylogin}" style="width:400px" />
     	</dd>
-    	<dt>bit.ly ApiKey：</dt>
+    	<dt>配置ApiKey：</dt>
     	<dd>
 			<input type="text" name="bitlykey" value="{$bitlykey}" style="width:400px" />
 			<p>请输入bit.ly的ApiKey和登录帐号account</p>
@@ -35,7 +37,11 @@
     	</dd>
     </dl>
     <dl class="lineD">
-    	<dt>goo.gl ApiKey：</dt>
+		<dt>使用goo.gl</dt>
+    	<dd>
+			<input type="radio" name="shorturlapi" value="google" <eq name="shorturlapi" value="google">checked=checked</eq> /> http://goo.gl/xxx
+    	</dd>
+    	<dt>配置ApiKey：</dt>
     	<dd>
 			<input type="text" name="googlekey" value="{$googlekey}" style="width:400px" />
 			<p>请输入google的ApiKey (目前可以不用填任何信息)</p>
@@ -44,12 +50,25 @@
 			<p>点左侧API access,可以找到ApiKey.</p>
     	</dd>
     </dl>
+	<dl class="lineD">
+		<dt>使用dwz.cn</dt>
+    	<dd>
+			<input type="radio" name="shorturlapi" value="baidu" <eq name="shorturlapi" value="baidu">checked=checked</eq> /> http://dwz.cn/xxx
+			<p>百度短网址不需要配置，但也不太稳定。</p>
+    	</dd>
+    </dl>
     <dl class="lineD">
-    	<dt>本地URL：</dt>
+		<dt>使用本地URL</dt>
+    	<dd>
+			<input type="radio" name="shorturlapi" value="local" <eq name="shorturlapi" value="local">checked=checked</eq> /> http://yourdomain/url/xxx
+    	</dd>
+    	<dt>配置域名：</dt>
     	<dd>
 			<input type="text" name="localurl" value="{$localurl}" style="width:400px" />
-			<p>举例：要将 http://yourdomain/url/xxx 替换为 http://tsurl.cn/xxx </p>
-			<p>请将http://tsurl.cn/xxx 的请求都转向到 http://yourdomain/shorturl.php?url=xxx</p>
+			<p>使用当前域名请留空，默认生成网址如下http://yourdomain/url/xxx（开启rewrite） 或 http://yourdomain/shorturl.php?url=xxx。</p>
+			<p>使用自定义域名请输入自定义域名前缀，如：http://tsurk.cn</p>
+			<p>则将 http://yourdomain/url/xxx 替换为 http://tsurl.cn/xxx </p>
+			<p>此时请将http://tsurl.cn/xxx 的请求都转向(rewite)到 http://yourdomain/shorturl.php?url=xxx</p>
     	</dd>
     </dl>
     <div class="page_btm">

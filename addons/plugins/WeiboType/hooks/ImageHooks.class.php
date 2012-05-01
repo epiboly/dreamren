@@ -119,7 +119,13 @@ class ImageHooks extends AbstractWeiboTypeHooks
             }
 
             $imageInfo = getimagesize($_FILES['pic']['tmp_name']);
-            $imageType = strtolower(substr(image_type_to_extension($imageInfo[2]),1));
+
+            if(function_exists(image_type_to_extension($imageInfo[2],1))){
+                $imageType = strtolower(substr(image_type_to_extension($imageInfo[2]),1));
+            }else{
+                $imageType = strtolower(substr($_FILES['pic']['name'],strrpos($_FILES['pic']['name'],'.')+1));
+            }
+
             if($imageType == "jpeg") $imageType ='jpg';
 
             $config['image']['ext'] = empty($config['image']['ext'])?"jpg;png;jpeg;gif":$config['image']['ext'];

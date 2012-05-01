@@ -15,7 +15,7 @@ class WeiboAttachModel extends Model{
 
 		//获取附件总数
 		$count	=	$this->where($map)->count();
-		return intval($count['count']);
+		return intval($count);
 	}
 
 	//获取用户的微博附件
@@ -25,6 +25,7 @@ class WeiboAttachModel extends Model{
 			$attaches = $this->field('attach_id,weibo_id,uid')->where("uid={$uid} AND weibo_type={$weibo_type}")->order("attach_id desc")->findAll();
 		}else{
 			$attaches = $this->field('attach_id,weibo_id,uid')->where("uid={$uid} AND weibo_type={$weibo_type}")->order("attach_id desc")->findPage($row);
+			$backupAttaches = $attaches;
 			$attaches = $attaches['data'];
 		}
 		//获取附件ID
@@ -36,7 +37,13 @@ class WeiboAttachModel extends Model{
 		$map['userId']	=	$uid;
 		$map['id']		=	array('in',$attach_ids);
 		$map['isDel']	=	0;
-		$result = M('Attach')->where($map)->order("id desc")->findPage($raws);
+		if(!$row) {
+			$result['data'] = M('Attach')->where($map)->order("id desc")->findAll();
+		} else {
+			$result = M('Attach')->where($map)->order("id desc")->findPage($row);
+			$backupAttaches['data'] = $result['data'];
+			$result = $backupAttaches;
+		}
 		//增加微博ID的信息
 		foreach($result['data'] as $k=>$v){
 			$result['data'][$k]['weibo_id']	=	$attach_info[$v['id']];

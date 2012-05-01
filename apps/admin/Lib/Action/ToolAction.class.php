@@ -343,58 +343,5 @@ class ToolAction extends AdministratorAction {
 		$this->assign('uid', $_GET['uid']);
 		$this->display();
 	}
-	
-	/*
-	 * CNZZ统计
-	 */
-	public function cnzz()
-	{
-		$this->assign(model('Xdata')->lget('cnzz'));
-		$this->display();
-	}
-	
-	public function doSetCnzz()
-	{
-		// 申请CNZZ统计
-		$domain = SITE_URL;
-		$base	= 'ThinkSNS';
-		$key	= md5($domain . 'KslDiq5H');
-		$url	= "http://intf.cnzz.com/user/companion/thinksns.php?domain={$domain}&key={$key}&cms={$base}";
-		$result	= file_get_contents($url);
-		// 检查返回值
-		switch (intval($result)) {
-			case -1:
-				; // No break!
-			case -2:
-				; // No break!
-			case -3:
-				$this->error('Key错误');
-				break; 
-			case -4:
-				$this->error('申请失败');
-				break;
-			case -5:
-				$this->error('申请过于频繁');
-				break;
-			default:
-				if (strpos($result, '@') === false)
-					$this->error('申请失败');
-		}
-		// 申请成功
-		$result = explode('@', $result);
-		$data['cnzz_id']		= $result[0];
-		$data['cnzz_password']	= $result[1];
-		model('Xdata')->lput('cnzz', $data);
-		$this->assign('jumpUrl', U('admin/Tool/cnzz'));
-		$this->success('安装成功');
-	}
-	
-	public function deleteCnzz()
-	{
-		$data['cnzz_id']		= '';
-		$data['cnzz_password']	= '';
-		model('Xdata')->lput('cnzz', $data);
-		$this->assign('jumpUrl', U('admin/Tool/cnzz'));
-		$this->success('删除成功');
-	}
+
 }

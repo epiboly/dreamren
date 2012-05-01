@@ -54,7 +54,7 @@ function U($url, $params = false, $redirect = false, $suffix = true)
 		// 载入路由
 		$router_ruler = C('router');
 		$router_key   = $app . '/' . ucfirst($mod) . '/' . $act;
-		
+
 		//路由命中
 		if (isset($router_ruler[$router_key])) {
 			//填充路由参数
@@ -541,7 +541,7 @@ function api($name) {
         return $api;
     }else {
         return false;
-    }     
+    }
 }
 
 
@@ -704,14 +704,13 @@ function W($name, $data = array(), $return = false) {
 function S($name,$value='',$expire='',$type='') {
 
     require_once CORE_PATH . '/sociax/Cache.class.php';
-    //require_once CORE_PATH . '/sociax/CacheFile.class.php';
-    
+
     $cache = Cache::getInstance();
-    
+
     $name = C('DATA_CACHE_PREFIX').$name;
-    
+
     if('' !== $value) {
-    	
+
         if(is_null($value)) {
             // 删除缓存
             $result =   $cache->rm($name);
@@ -734,30 +733,32 @@ function S($name,$value='',$expire='',$type='') {
 
 // 快速文件数据读取和保存 针对简单类型数据 字符串、数组
 function F($name,$value='',$path=false) {
-	static $_cache = array();
-	require_cache(ADDON_PATH."/libs/Multi/SimpleFile.php");
 
-    if(!$path) {
-    	$path	=	SITE_PATH.'/_runtime/_cache/';
-	}
-	
-	$name = C('DATA_CACHE_PREFIX').$name;
-	
-	SimpleFile::setRoot($path);
-	$file = new SimpleFile($name);
+    require_once CORE_PATH . '/sociax/Cache.class.php';
+
+    $cache = Cache::getInstance();
+
+    $name = C('DATA_CACHE_PREFIX').$name;
+
     if('' !== $value) {
+
         if(is_null($value)) {
             // 删除缓存
-			return $file->rm();
-        }else {
-            $value = serialize($value);
-			return $file->save($value);
+            $result =   $cache->rm($name);
+            if($result)   unset($_cache[$type.'_'.$name]);
+            return $result;
+        }else{
+            // 缓存数据
+            $cache->set($name,$value);
+            $_cache[$type.'_'.$name]     =   $value;
         }
+        return ;
     }
-    if(isset($_cache[$name])) return $_cache[$name];
-	// 获取缓存数据
-	$value = unserialize($file->read());
-	if($value) $_cache[$name] = $value;
+    if(isset($_cache[$type.'_'.$name]))
+        return $_cache[$type.'_'.$name];
+    // 获取缓存数据
+    $value      =  $cache->get($name);
+    $_cache[$type.'_'.$name]     =   $value;
     return $value;
 }
 

@@ -1,10 +1,5 @@
 <?php
-/**
- * watermark
- * 添加图片水印类
- * @author 浪子不归 <fbcha@163.com>
- * @license ThinkSNS Version 2.5
- */
+
 class WaterMark extends Think
 {
 	//判断是否开启水印功能

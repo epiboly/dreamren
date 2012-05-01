@@ -759,13 +759,12 @@ class  ThinkTemplate extends Think
      */
     public function parseInclude($tmplPublicName){
 
-		//thinksns修改: 2009-5-28 可以导入风格模板目录下的模板文件，写的比较死，以后再优化
+
 		if(substr($tmplPublicName,0,9)=='__THEME__'){
 			$tmplTemplateFile	=	THEME_PATH.'/'.substr($tmplPublicName,10).'.html';
 			$parseStr = file_get_contents($tmplTemplateFile);
 			return $this->parse($parseStr);
 		}
-		//thinksns修改:结束
 
         if(substr($tmplPublicName,0,1)=='$')
             //支持加载变量文件名

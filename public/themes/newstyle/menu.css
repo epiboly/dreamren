@@ -2,8 +2,7 @@
 /*-----------网站菜单样式-------------------------------------------
  说明: 
 ------------------------------------------------------------ */
-
-/* TAB */
+/*tab-menu*/
 .tab-menu{height:31px;overflow: visible;white-space: nowrap;background:url(images/tab_line_bg.gif) repeat-x 0 bottom}
 .myop .tab-menu{}
 .tab-menu ul{height:27px}
@@ -22,6 +21,7 @@
 .tab-menu .tab_group_hover .Inc_new{background-color:#fff;border:1px solid #D2DBEA;padding:5px;position:absolute;top:27px;border-top:3px solid #D2DBEA;left:0px}
 .tab-menu .tab_group_hover .Inc_new a{height:25px;line-height:25px;float: none;padding:3px;text-decoration:none;display:block;font-size: 14px}
 .tab-menu .tab_group_hover .Inc_new a:hover{background-color:#F5F5F5}
+/* TAB */
 .tabMenu{height:28px;line-height:26px;background:url(images/tab_line_bg.gif) repeat-x 0 bottom}
 .tabMenu li a{display:block;float:left;margin:0 2px 0 0;_margin:0 2px 0 0;color:#666;line-height:18px;background:url(images/tab_menu.gif) repeat-x 0 -35px}
 .tabMenu li a span{background-color:#fff;height:18px;line-height:18px;padding:5px 10px;background:url(images/tab_menu.gif) repeat-x right -35px;display:inline-block;margin:0 0 0 1px}

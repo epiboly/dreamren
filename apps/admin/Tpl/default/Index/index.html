@@ -5,7 +5,6 @@
 <title>{$ts['site']['site_name']}后台管理</title>
 <script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
 <script type="text/javascript">
-/* 按下F5时仅刷新iframe页面 */
 function inactiveF5(e) {
 	return ;
 	e=window.event||e;
@@ -155,33 +154,6 @@ document.onkeydown=inactiveF5;
 		parent.MainIframe.location = url;
 	}
 	
-	/*
-	function resetEscAndF5(e) {
-		e = e ? e : window.event;
-		actualCode = e.keyCode ? e.keyCode : e.charCode;
-		if(actualCode == 116 && parent.MainIframe) {
-			parent.MainIframe.location.reload();
-			if(document.all) {
-				e.keyCode = 0;
-				e.returnValue = false;
-			} else {
-				e.cancelBubble = true;
-				e.preventDefault();
-			}
-		}
-	}
-	
-	function _attachEvent(obj, evt, func, eventobj) {
-		eventobj = !eventobj ? obj : eventobj;
-		if(obj.addEventListener) {
-			obj.addEventListener(evt, func, false);
-		} else if(eventobj.attachEvent) {
-			obj.attachEvent('on' + evt, func);
-		}
-	}
-	
-	_attachEvent(document.documentElement, 'keydown', resetEscAndF5);
-	_attachEvent(window, 'keydown', resetEscAndF5, parent.frames[0]);
-	*/
+
 </script>
 </html>

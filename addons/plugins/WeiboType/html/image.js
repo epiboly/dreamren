@@ -55,7 +55,7 @@ jQuery.extend(weibo.plugin.image, {
 							}else{
 								var html = "<img src='"+txt.picurl+"'><input name='publish_type_data' type='hidden' style='width:86%' value="+txt.type_data+" />";					}
 							if($('#content_publish').val()==''){
-								$('#content_publish').val('图片分享 ');
+								$('#content_publish').val('#图片分享# ');
 							}
               $("#publish_type_content").html( txt.file_name+'&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="weibo.plugin.image.removeImage();">删除图片</a><BR>'+html );
 							$('div.talkPop').data('type', 1);

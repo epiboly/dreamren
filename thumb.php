@@ -1,7 +1,6 @@
 <?php
 /*
  * 自动缩略图 参数 url|w|h|type="cut/full"|mark="text/image|r"
- * thumb.php?url=/thinksns/data/userface/000/00/00/41_middle_face.jpg?1247718988&w=20&h=20
 */
 error_reporting(0);
 set_time_limit(30);

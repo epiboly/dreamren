@@ -601,7 +601,8 @@ $.extend({
                             isLoading = false;
                             $(opt.weiboListDiv).append(txt);
                             try{
-                            	var tempSinceId = $(opt.weiboListDiv).find('li:last').attr('id').split("_").pop();
+                            	// var tempSinceId = $(opt.weiboListDiv).find('li:last').attr('id').split("_").pop();
+                            	var tempSinceId = $(opt.weiboListDiv).find("li[id^='list_li_']").last().attr('id').split('_').pop();
                             }catch(e){
                             	var tempSinceId = false;
                             }

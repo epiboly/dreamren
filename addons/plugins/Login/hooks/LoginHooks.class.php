@@ -213,13 +213,12 @@ class LoginHooks extends Hooks {
                     $syncData = $platform->update ( $content, $v );
                     break;
                 case 1:
-                    $syncData = $platform->update ( $content."  ".U('home/space/detail','id=>'.$id), $v );
+                    $syncData = $platform->update ( $content."  ".U('home/space/detail',array('id'=>$id)), $v );
                     break;
                 default:
-                    $syncData = array();
+                    $syncData = $platform->update ( $content."  ".U('home/space/detail',array('id'=>$id)), $v );
                     return;
                 }
-                //dump($syncData);
                 //记录发的新微博到数据库
                 if(empty($result)){
                     $result = $platform->saveData($syncData);
@@ -826,7 +825,7 @@ class LoginHooks extends Hooks {
 	public function login_success_on_client()
 	{
 	    header('Content-type:text/html;charset=utf-8');
-		echo '登录成功';
+		echo '登录成功，点击进入'.'<a href="'.U('wap').'">我的主页</a>';
 		exit;
 	}
 

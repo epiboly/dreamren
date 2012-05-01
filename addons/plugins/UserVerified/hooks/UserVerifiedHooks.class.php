@@ -73,7 +73,7 @@ class UserVerifiedHooks extends Hooks
 	        if(false === self::$cache_list[$uid]) self::$cache_list[$uid] = $this->_setVerifiedCache($uid);
 	    }
 	    $user_verified = self::$cache_list[$uid];
-		$this->assign('user_verified', $user_verified['info']);
+		$this->assign('user_verified', $user_verified);
 		$this->display('space_verified');
 	}
 
@@ -215,6 +215,11 @@ class UserVerifiedHooks extends Hooks
 			echo 0;
 			exit;
 		}
+    }
+    
+    public function deleteVerifiedTab()
+    {
+    	$this->display('deleteVerifiedTab');
     }
 
     private function _getListData($uid){

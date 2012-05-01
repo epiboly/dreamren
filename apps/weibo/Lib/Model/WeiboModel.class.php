@@ -2,24 +2,7 @@
 class WeiboModel extends Model{
     var $tableName = 'weibo';
 
-	/**
-	 *
-	 +----------------------------------------------------------
-	 * Description 微博发布
-	 +----------------------------------------------------------
-	 * @author Nonant nonant@thinksns.com
-	 +----------------------------------------------------------
-	 * @param $uid 发布者用户ID
-	 * @param $data 微博主要数据
-	 * @param $from 从哪发布的
-	 * @param $type 微博类型
-	 * @param $type_data   微博类型传来的数据
-	 +----------------------------------------------------------
-	 * @return return_type
-	 +----------------------------------------------------------
-	 * Create at  2010-9-17 下午05:02:06
-	 +----------------------------------------------------------
-	 */
+	
      function publish($uid,$data,$from=0,$type=0,$type_data,$sync, $from_data){
      	$data['content'] =t( $data['content'] );
      	if($id = $this->doSaveWeibo($uid, $data, $from , $type ,$type_data, $from_data)){

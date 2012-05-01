@@ -28,10 +28,11 @@ class SquareAppShowHooks extends Hooks
 	private function _squareTab()
 	{
 		static $_menu = array();
-
+		
 		if (empty($_menu)) {
 			$square_config = model('AddonData')->lget('square_app_show');
 			$apps_list = model('App')->getAllApp('app_name,app_alias,status');
+			
 			foreach ($apps_list as $value) {
 				if ($square_config[$value['app_name']] && $value['status']) {
 					$_menu[] = array(
@@ -46,7 +47,6 @@ class SquareAppShowHooks extends Hooks
 				}
 			}
 		}
-
 		return $_menu;
 	}
 
@@ -152,23 +152,35 @@ class SquareAppShowHooks extends Hooks
 	/* 插件后台配置项 */
 	public function config()
 	{
+		
 		$apps_show_list = array('photo', 'blog', 'group');
-		$this->assign('apps_list', model('App')->getAllApp('app_name,app_alias,status'));
+		
+		$square_app_show = model('AddonData')->lget('square_app_show');
+		
+		$list= model('App')->getAllApp('app_name,app_alias,status');
+		
+		$this->assign('apps_list', $list);
 		$this->assign('apps_show_list', $apps_show_list);
-		$this->assign(model('AddonData')->lget('square_app_show'));
+		$this->assign($square_app_show);
 		$this->display('index');
 	}
 
 	public function saveConfig($param)
 	{
+		if (!$_POST['__hash__'])
+			$this->error();
+
 		$apps_show_list = array('photo', 'blog', 'group');
 		foreach ($apps_show_list as $v) {
 			$post[$v] = intval($_POST[$v]);
 		}
 		$res = model('AddonData')->lput('square_app_show', $post);
-
+		
+		
 		if ($res) {
+			F('Cache_App',null);
 			$this->assign('jumpUrl', Addons::adminPage('config'));
+			
     		$this->success();
 		} else {
     		$this->error();

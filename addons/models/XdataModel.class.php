@@ -10,20 +10,6 @@
 // +----------------------------------------------------------------------
 // $Id$
 
-/**
- +------------------------------------------------------------------------------
- * Key-value存储引擎，用MySQL模拟memcache等key-value数据库写法
- * 以后可以切换到其它成熟数据库 或 amazon云计算平台
- +------------------------------------------------------------------------------
- * @category	core
- * @package		core
- * @author		liuxiaoqing <liuxiaoqing@thinksns.com>
- * @version		$0.1$ 完成基本数据结构
-				$0.2$ 增加":查询语法"  list:key
-				$0.3$ todo：增加多条查询 list1:key1,list2:key2,
-				$0.4$ todo：增加模糊查询 list3:*,*:key,list1:ke3*;
- +------------------------------------------------------------------------------
- */
 class XdataModel extends Model {
 
 	protected	$tableName	=	'system_data';	// 数据库表名
@@ -45,18 +31,19 @@ class XdataModel extends Model {
 		//格式化数据
 		if(is_array($listData)){
 
-			$insert_sql	.=	"REPLACE INTO __TABLE__ (`list`,`key`,`value`) VALUES ";
+			$insert_sql	.=	"REPLACE INTO __TABLE__ (`list`,`key`,`value`,`mtime`) VALUES ";
 
 			foreach($listData as $key=>$data){
-				$insert_sql	.=	" ('$listName','$key','".serialize($data)."') ,";
+				$insert_sql	.=	" ('$listName','$key','".serialize($data)."','".date('Y-m-d H:i:s')."') ,";
 			}
-
+			
 			$insert_sql	=	rtrim($insert_sql,',');
 
 			//插入数据列表
 			$result	=	$this->execute($insert_sql);
+			
 		}
-
+		
 		$cache_id = '_xdata_lget_' . $listName;
 		F($cache_id, null);
 
@@ -75,19 +62,23 @@ class XdataModel extends Model {
 		static $_res = array();
 		if (isset($_res[$list_name]))
 			return $_res[$list_name];
-
+		
 		$cache_id = '_xdata_lget_' . $list_name;
+		
 		if (($data = F($cache_id)) === false) {
+			
 			$data = array();
 			$map['`list`'] = $list_name;
-			$result	= $this->order('id ASC')->where($map)->findAll();
+			$result	= $this->order('id ASC')->where($map)->findAll();	
+			
 			if ($result)
 				foreach($result as $v)
 					$data[$v['key']] = unserialize($v['value']);
 
 			F($cache_id, $data);
 		}
-
+		
+					//dump($data);
 		$_res[$list_name] = $data;
 		return $_res[$list_name];
 	}

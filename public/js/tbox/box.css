@@ -13,10 +13,10 @@
 	.boxy-wrapper .boxy-bottom-right,
 	.boxy-wrapper .boxy-bottom-left { width: 6px; height: 6px; padding: 0 }
 	
-	.boxy-wrapper .boxy-top-left { background:url('images/boxy-nw.png') no-repeat; _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://develop.thinksns.com/ts_beta_2_0/public/js/tbox/images/boxy-nw.png', sizingMethod='crop');}
-	.boxy-wrapper .boxy-top-right { background:url('images/boxy-ne.png') no-repeat; _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://develop.thinksns.com/ts_beta_2_0/public/js/tbox/images/boxy-ne.png', sizingMethod='crop');}
-	.boxy-wrapper .boxy-bottom-right { background:url('images/boxy-se.png') no-repeat; _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://develop.thinksns.com/ts_beta_2_0/public/js/tbox/images/boxy-se.png', sizingMethod='crop');}
-	.boxy-wrapper .boxy-bottom-left {  background:url('images/boxy-sw.png') no-repeat; _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://develop.thinksns.com/ts_beta_2_0/public/js/tbox/images/boxy-sw.png', sizingMethod='crop');}
+	.boxy-wrapper .boxy-top-left { background:url('images/boxy-nw.png') no-repeat; _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/boxy-nw.png', sizingMethod='crop');}
+	.boxy-wrapper .boxy-top-right { background:url('images/boxy-ne.png') no-repeat; _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/boxy-ne.png', sizingMethod='crop');}
+	.boxy-wrapper .boxy-bottom-right { background:url('images/boxy-se.png') no-repeat; _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/boxy-se.png', sizingMethod='crop');}
+	.boxy-wrapper .boxy-bottom-left {  background:url('images/boxy-sw.png') no-repeat; _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/boxy-sw.png', sizingMethod='crop');}
 	
 	
 	

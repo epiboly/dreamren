@@ -21,12 +21,12 @@ jQuery.extend(weibo.plugin.blog, {
 		 });
 	},
 	onload:function(id){
-
 		var data = $("#"+id).contents().find("body").html();
 		var result;
 		if(data.length != 0 && data != undefined){
 			result = eval("("+data+")");
 			if(result.status){
+				$('div .talkPop').remove();
 				$('#content_publish').val(result.data.html);
 				weibo.publish_type_val(8);
 
@@ -38,8 +38,9 @@ jQuery.extend(weibo.plugin.blog, {
 			        newInput.value=result.data.image;
 			        $('#miniblog_publish').append(newInput);
 			    }
+				weibo.do_publish();
+
 			    weibo.checkInputLength(_LENGTH_);
-			    weibo.do_publish();
 			    weibo.setLastIdByWeiboListDiv();
 			}else{
 				ui.error(result.info);

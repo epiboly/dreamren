@@ -56,6 +56,7 @@ class App
         //加载所有插件
         Addons::loadAllValidAddons();
 
+
         if (!defined('MODULE_NAME'))
             define('MODULE_NAME', App::getModule()); // Module名称
         if (!defined('ACTION_NAME'))
@@ -67,6 +68,8 @@ class App
             $_POST   = stripslashes_deep( $_POST   );
             $_COOKIE = stripslashes_deep( $_COOKIE );
         }
+
+		$_REQUEST = array_merge($_GET,$_POST);
 
         // 初始化运行时缓存
         object_cache_init();

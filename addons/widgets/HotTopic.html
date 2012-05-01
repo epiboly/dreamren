@@ -3,11 +3,13 @@
   <if condition="'recommend' eq $type">
   <volist id="vo" name="hotTopic">
     <li>
-    	<if condition="$vo['domain']">
+    	<!--<if condition="$vo['domain']">
     		<a href="{:U('home/User/topics',array('domain'=>urlencode($vo['domain'])))}" title="{$vo.name}">{$vo.name}({$vo.count})</a><br />
     	<else />
     		<a href="{:U('home/User/topics',array('k'=>urlencode($vo['name'])))}" title="{$vo.name}">{$vo.name}({$vo.count})</a><br />
     	</if>
+		-->
+		<a href="{:U('home/User/topics',array('k'=>urlencode($vo['name'])))}" title="{$vo.name}">{$vo.name}({$vo.count})</a><br />
 	    <if condition="$vo['note']">
 	    <div class="topic_tips">
 	    	<div class="topic_arrt"><div class="topic_arr"></div></div>

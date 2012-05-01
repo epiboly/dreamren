@@ -18,6 +18,13 @@ class IndexAction extends Action{
         $data['privacy'] = D('UserPrivacy','home')->getPrivacy($this->mid,$data['data']['uid']);
         $data['randtime'] = ($data['quick_reply_comment_id'])?$data['quick_reply_comment_id']:$data['data']['weibo_id'] ;
         if(!$data['quick_reply']) $data['list'] =  D('Comment')->getComment($intMinId);
+        if($intMinId){
+            $data['weibo_id'] = $intMinId;
+        }else{
+            $map['comment_id'] = $data['quick_reply_comment_id'];
+            $data['weibo_id'] = D('Comment')->getField('weibo_id',$map);
+        }
+
         $this->assign( $data );
         $this->display();
     }

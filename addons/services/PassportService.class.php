@@ -82,14 +82,14 @@ class PassportService extends Service
 		    $uc_user = ts_get_ucenter_user_ref($user['uid']);
 			($user['login_from_dz'])?'':uc_user_synlogin($uc_user['uc_uid']);
 		}
-		$this->_recordLogin($user['uid'],$user['uname']);
+		$this->_recordLogin($user['uid'],$user['uname'], $is_remeber_me);
 		return $result;
 	}
 
 	/**
 	 * 设置登录状态、记录登录日志
 	 */
-	private function _recordLogin($uid,$uname){
+	private function _recordLogin($uid,$uname, $is_remeber_me = false){
 		$_SESSION['mid']	= $uid;
 		$_SESSION['uname']	= $uname;
 

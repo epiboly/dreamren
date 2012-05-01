@@ -119,7 +119,7 @@ class Addons
 	static public function loadAllValidAddons()
 	{
         //加载所有有效的插件
-        self::$validHooks = F('thinksns_addon_list');
+        self::$validHooks = F('wekit_addon_list');
         if(empty(self::$validHooks)){
             self::$validHooks = model('Addons')->resetAddonCache();
         }

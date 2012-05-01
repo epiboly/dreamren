@@ -30,7 +30,6 @@ class IndexAction extends AdministratorAction {
 
     	$apps_menu = array();
     	$apps_menu['微博'] = U('weibo/Admin/index');
-    	$apps_menu['漫游'] = SITE_URL . '/apps/myop/myop.php?my_suffix=' . urlencode('/appadmin/list');
 
     	$apps = model('App')->getAdminApp('app_name,app_alias,admin_entry');
     	foreach ($apps as $v) {
@@ -41,7 +40,6 @@ class IndexAction extends AdministratorAction {
     	$menu['index'] 		=   array(
     		'首页'			=>	array(
     			'首页'		=>	U('admin/Home/statistics'),
-    			'系统升级'	=>	U('admin/Home/update'),
     		),
     	);
 
@@ -106,12 +104,12 @@ class IndexAction extends AdministratorAction {
     			'缓存更新'	=>	SITE_URL . '/cleancache.php?all',
     			'地区管理'	=>	U('admin/Tool/area'),
     			'邀请统计'	=>	U('admin/Tool/inviteRecord'),
-    			'CNZZ统计'	=>	U('admin/Tool/cnzz'),
+    			
     		),
 
     		'插件'			=>	array(
     			'插件列表'   =>  U('admin/Addons/index'),
-    			//'短网址配置'	=>	U('admin/Plugin/shorturl'),
+    			
     		),
     	);
 

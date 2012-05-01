@@ -1028,9 +1028,9 @@ function friendlyDate($sTime,$type = 'normal',$alt = 'false') {
 		}elseif( $dDay > 0 && $dDay<=7 ){
 			return intval($dDay)."天前";
 		}elseif( $dDay > 7 &&  $dDay <= 30 ){
-			return ceil($dDay/7) . '周前';
+			return intval($dDay/7) . '周前';
 		}elseif( $dDay > 30 ){
-			return ceil($dDay/30) . '个月前';
+			return intval($dDay/30) . '个月前';
 		}
 	//full: Y-m-d , H:i:s
 	}elseif($type=='full'){
@@ -1054,7 +1054,7 @@ function friendlyDate($sTime,$type = 'normal',$alt = 'false') {
 
 /**
  * 时间显示
- * 
+ *
  * @param int    $sTime 待显示的时间
  * @param string $format 时间格式
  * @return string
@@ -1115,7 +1115,7 @@ function getUserName($uid,$lang='zh') {
 
 /*
  * 获取用户Gid[Mentor项目]
- * 
+ *
  */
 function getUserAtString($uid, $type = 'uid')
 {
@@ -1536,7 +1536,7 @@ function getSubBeKeyArray($origin, $key) {
  */
 function getUserEmail($uid) {
 	$map ['uid'] = $uid;
-	return model ( 'User' )->where ( $map )->getField ( 'email' );
+	return M( 'User' )->where ( $map )->getField ( 'email' );
 }
 
 /**
@@ -2648,12 +2648,12 @@ function object_cache_reset() {
 
 function getOAuthToken($uid)
 {
-    return md5($uid . 'thinksns');
+    return md5($uid . 'wekit');
 }
 
 function getOAuthTokenSecret()
 {
-    return md5($_SERVER['REQUEST_TIME'] . 'thinksns');
+    return md5($_SERVER['REQUEST_TIME'] . 'wekit');
 }
 
 function getCnzz($set = true){

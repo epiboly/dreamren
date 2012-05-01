@@ -10,6 +10,7 @@
 <script>
 function createFollowGroup(title){
 	var title = $("input[name='followGroupTitle']").val();
+	title = $.trim(title);
 	if(title == ''){
 		ui.error('请输入分组标题！');
 		return false;
@@ -19,8 +20,11 @@ function createFollowGroup(title){
 	}
 	<if condition="$gid">
 		var gid = '{$gid}';
-		$.post(U('weibo/FollowGroup/setGroup'),{title:title,gid:gid},function(gid){
-			if(gid == 1){
+		$.post(U('weibo/FollowGroup/setGroup'),{title:title,gid:gid},function(res){
+			res = eval('(' + res + ')');
+			var status = res.status;
+			var gid = res.info;
+			if(status != 0){
 				$('#current_follow_group').html(title);
 				ui.box.close();
 			}else{
@@ -28,9 +32,12 @@ function createFollowGroup(title){
 			}
 		});
 	<else />
-		$.post(U('weibo/FollowGroup/setGroup'),{title:title},function(gid){
-			if(gid != 0){
-				var url = window.location.href.match(/home/) ? U('home/User/index') + '&gid=' + gid : U('home/space/follow') + '&gid=' + gid + '&type=following&uid=' + _UID_;
+		$.post(U('weibo/FollowGroup/setGroup'),{title:title},function(res){
+			res = eval('(' + res + ')');
+			var status = res.status;
+			var gid = res.info;
+			if(status != 0){
+				var url = window.location.href.match(/space/) ? U('home/space/follow') + '&gid=' + gid + '&type=following&uid=' + _UID_ : U('home/User/index') + '&follow_gid=' + gid;
 				location.href=url;
 			}else{
 				ui.error('此分组名已存在');

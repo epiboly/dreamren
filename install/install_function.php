@@ -3,6 +3,8 @@ if (!defined('WEKIT_INSTALL'))
 {
 	exit ('Access Denied');
 }
+
+
 function str_parcate($cate, &$str_parcate, $startID = 0)
 {
 	if (!$cate[$startID]['cup']) return;
@@ -27,6 +29,7 @@ function str_subcate($cate, &$str_subcate, $startID = 0)
 		}
 	}
 }
+
 function addS(&$array)
 {
 	if (is_array($array))
@@ -41,6 +44,7 @@ function addS(&$array)
 		$array = addslashes($array);
 	}
 }
+
 function result($result = 1, $output = 1)
 {
 	if($result)
@@ -62,6 +66,7 @@ function result($result = 1, $output = 1)
 		echo $text;
 	}
 }
+
 function createtable($sql, $db_charset)
 {
 	$db_charset = (strpos($db_charset, '-') === FALSE) ? $db_charset : str_replace('-', '', $db_charset);
@@ -70,6 +75,7 @@ function createtable($sql, $db_charset)
 	return preg_replace("/^\s*(CREATE TABLE\s+.+\s+\(.+?\)).*$/isU", "\\1", $sql).
 		(mysql_get_server_info() > "4.1" ? " ENGINE=$type DEFAULT CHARSET=$db_charset" : " TYPE=$type");
 }
+
 function getip()
 {
 	if (isset ($_SERVER['HTTP_X_FORWARDED_FOR']))
@@ -87,10 +93,11 @@ function getip()
 	$onlineip = preg_match('/[\d\.]{7,15}/', addslashes($onlineip), $onlineipmatches);
 	return $onlineipmatches[0] ? $onlineipmatches[0] : 'unknown';
 }
+
 function writable($var)
 {
 	$writeable = FALSE;
-	$var = THINKSNS_ROOT.$var;
+	$var = WEKIT_ROOT.$var;
 	if(!is_dir($var))
 	{
 		@mkdir($var, 0777);
@@ -98,7 +105,7 @@ function writable($var)
 	if (is_dir($var))
 	{
 		$var .= '/temp.txt';
-		if (($fp = @fopen($var, 'w')) && (fwrite($fp, 'thinksns')))
+		if (($fp = @fopen($var, 'w')) && (fwrite($fp, 'wekit')))
 		{
 			fclose($fp);
 			@unlink($var);
@@ -107,6 +114,8 @@ function writable($var)
 	}
 	return $writeable;
 }
+
+
 function PWriteFile($filename, $content, $mode = 'ab')
 {
 	if (strpos($filename, '..') !== FALSE)
@@ -132,6 +141,7 @@ function PWriteFile($filename, $content, $mode = 'ab')
 	}
 	return FALSE;
 }
+
 function random($length, $isNum = FALSE)
 {
 	$random = '';

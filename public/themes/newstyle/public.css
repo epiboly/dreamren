@@ -2,7 +2,6 @@
 /*公用样式部分*/
 html {filter: expression(document.execCommand("BackgroundImageCache", false, true));}
 *{word-wrap:break-word }
-body {font:12px Arial,Helvetica,sans-serif,Simsun;text-align:center;color:#666}
 body, div, dl, dt, dd, ul, ol, li, pre, form, fieldset, blockquote, h1, h2, h3, h4, h5, h6,p{padding:0;margin:0 }
 h1, h2, h3, h4, h5, h6 {font-weight: normal}
 table, td, tr, th {font-size:12px }
@@ -16,16 +15,14 @@ select {border: 1px solid #BDC7D8;margin-right: 5px}
 em{color:#999;font-family: Tahoma, Verdana, helvetica;font-size: 12px;font-style: normal;white-space: nowrap}
 abbr, acronym {border:0 }
 address, caption, cite, code, dfn, em, th, var {font-weight:normal;font-style:normal }
-.userPic{float:left}
-.userPic img{width:50px;height:50px;border:solid 1px #ccc;padding:1px}
+
 .float_n{float:none;height:55px;width:55px}
 /* link color font */
 .alR{text-align:right }
 .alL{text-align:left }
 .alC{text-align:center }
 .alM{vertical-align: middle}
-.user_app a{color:#507FA5}
-.user_app a:hover{text-decoration:none}
+
 .fn {font-weight: normal;overflow:hidden}
 .fB {font-weight:bold }
 .fI {font-style:italic }
@@ -75,14 +72,15 @@ address, caption, cite, code, dfn, em, th, var {font-weight:normal;font-style:no
 .wn {white-space: nowrap}
 
 /*边框线及分割线*/
+.lineD_btm{border-bottom:1px solid #eee}
+.lineS_btm{border-bottom:1px solid #E6E6E6}
+.app_lineL{background: url(images/app_lineL.gif) repeat-y left top}
 .border{border: 1px solid #D3D3D3}
 .border2{border: 1px solid #ffe361}
 .vline{margin:0 5px;color:#999;font-style:normal}
 .line_l{color:#e0e0e0;margin:0 5px}
-.lineD_btm{border-bottom:1px solid #eee}
 .lineD_top{border-top:1px dashed #E6E6E6}
 .lineD_topR{border-top:1px dashed #b8cdd7}
-.lineS_btm{border-bottom:1px solid #E6E6E6}
 .lineS_top{border-top:1px solid #E6E6E6}
 .line_box{background-color:#F5F5F5;border:1px solid #ECECEC;padding:5px}
 .bg_warning{background-color:#F1F6FF}
@@ -95,7 +93,6 @@ address, caption, cite, code, dfn, em, th, var {font-weight:normal;font-style:no
 .app_lineB_w{background: url(images/app_line_w.gif) repeat-x left bottom}
 .app_lineR_w{background: url(images/app_lineR_w.gif) repeat-y right top}
 .app_lineB{background: url(images/app_lineB.gif) repeat-x left bottom}
-.app_lineL{background: url(images/app_lineL.gif) repeat-y left top}
 .roundbgF6{background-color:#f6f6f6;border:#f2f2f2 solid 1px;-moz-border-radius:5px;-khtml-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;padding:10px;overflow:hidden;*zoom:1}
 .roundbgFc{background-color:#FFFFCC;border:#F5C83C solid 1px;-moz-border-radius:5px;-khtml-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;padding:10px;overflow:hidden;*zoom:1}
 .published:link, .published:active, .published:visited {background-image: url(images/btn_add.gif);background-repeat: no-repeat;background-position: 0px top;line-height: 21px;font-size: 12px;height: 21px;width: 60px;color: #005fab;font-weight: bold;display: block;float: right;overflow: hidden;padding-top: 0;padding-right: 0;padding-bottom: 0;padding-left: 20px;margin: 0}
@@ -202,6 +199,14 @@ a.ico_close:hover{background-position:0 0}
 .ico_ppt,.ico_pptx{background-position:0 -106px}
 .ico_zip,.ico_rar{background-position:0 -371px}
 .ico_pdf{background-position:0 -159px}
+
+/*排行榜数字图标*/
+.top_topic_list .no{background-position:0 -341px;height:17px;line-height:17px;width:18px;text-align:center;color:#fff;font-size:12px;margin:6px 12px 0 3px;float:left}
+.top_topic_list .top1,.top_topic_list .top2,.top_topic_list .top3{height:29px;width:14px;line-height:20px;font-weight:bold;text-align:center;margin:4px 16px 0 5px}
+.top_topic_list .top1{background-position:0 -224px}
+.top_topic_list .top2{background-position:0 -263px}
+.top_topic_list .top3{background-position:0 -302px}
+
 
 /*发布框下图标*/
 .icon_add_link_d{background-position: -32px -2px;height:12px;width:16px;margin:0 2px -2px 0}

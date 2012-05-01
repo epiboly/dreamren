@@ -267,6 +267,7 @@ class OperateModel extends WeiboModel{
     //如果limit>0，则是加载。如果为0，则为计数
     //如果$uid为空，则是正在发生的
 	private function __optToNew($uid,$lastId,$type=null,$follow_gid=null,$limit = 0,$since = false){
+		$followCount = D('Follow','weibo')->getUserFollowCount($uid);
 	    if(!empty($type) && $type >0)
 	        $type_str = " and w.type=".$type;
 	    if($since){
@@ -282,7 +283,7 @@ class OperateModel extends WeiboModel{
 
 	    $map="{$weiboId} w.isdel=0 {$type_str}";
 
-	    if(!empty($uid)){
+	    if($followCount){
 	        if(!empty($follow_gid)){
 	            $fids = D('FollowGroup','weibo')->getUsersByGroup($uid,$follow_gid);
 	            $map.=' AND f.uid IN ('.implode(',',$fids).')';
@@ -347,7 +348,6 @@ class OperateModel extends WeiboModel{
     			$map.=" AND ( uid IN (SELECT fid FROM {$this->tablePrefix}weibo_follow WHERE uid=$uid AND type=0 or fid={$uid}))";
 	    	}
     	}
-
     	$list = $this->field('weibo_id')->where($map)->order('weibo_id DESC')->limit($row)->findAll();
     	unset($map);
         $return['data'] = $this->_paramResultData($list,$uid);

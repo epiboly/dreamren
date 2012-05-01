@@ -1,28 +1,6 @@
-# Sequel Pro dump
-# Version 2210
-# http://code.google.com/p/sequel-pro
-#
-# Host: 127.0.0.1 (MySQL 5.1.48)
-# Database: thinksns
-# Generation Time: 2010-12-13 14:54:18 +0800
-# ************************************************************
+DROP TABLE IF EXISTS `wk_ad`;
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
-# Dump of table ts_ad
-# ------------------------------------------------------------;
-
-DROP TABLE IF EXISTS `ts_ad`;
-
-CREATE TABLE `ts_ad` (
+CREATE TABLE `wk_ad` (
   `ad_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `place` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0:中部 1:头部 2:左侧 3:右侧 4:底部',
@@ -37,12 +15,11 @@ CREATE TABLE `ts_ad` (
 
 
 
-# Dump of table ts_app
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_app`;
 
-CREATE TABLE `ts_app` (
+DROP TABLE IF EXISTS `wk_app`;
+
+CREATE TABLE `wk_app` (
   `app_id` int(11) NOT NULL AUTO_INCREMENT,
   `app_name` varchar(255) NOT NULL,
   `app_alias` varchar(255) NOT NULL,
@@ -74,12 +51,11 @@ CREATE TABLE `ts_app` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-# Dump of table ts_area
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_area`;
 
-CREATE TABLE `ts_area` (
+DROP TABLE IF EXISTS `wk_area`;
+
+CREATE TABLE `wk_area` (
   `area_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `pid` int(11) NOT NULL DEFAULT '0',
@@ -87,7 +63,7 @@ CREATE TABLE `ts_area` (
   KEY `pid` (`pid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-INSERT INTO `ts_area` (`area_id`,`title`,`pid`)
+INSERT INTO `wk_area` (`area_id`,`title`,`pid`)
 VALUES
     (1,'北京',0),
     (2,'北京市',1),
@@ -3324,12 +3300,9 @@ VALUES
     (3233,'图木舒克市',3223),
     (3234,'五家渠',3223);
 
-# Dump of table ts_attach
-# ------------------------------------------------------------;
+DROP TABLE IF EXISTS `wk_attach`;
 
-DROP TABLE IF EXISTS `ts_attach`;
-
-CREATE TABLE `ts_attach` (
+CREATE TABLE `wk_attach` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `attach_type` varchar(50) NOT NULL DEFAULT 'attach',
   `userId` int(11) unsigned DEFAULT NULL,
@@ -3350,12 +3323,11 @@ CREATE TABLE `ts_attach` (
 
 
 
-# Dump of table ts_category
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_category`;
 
-CREATE TABLE `ts_category` (
+DROP TABLE IF EXISTS `wk_category`;
+
+CREATE TABLE `wk_category` (
   `id` int(4) NOT NULL AUTO_INCREMENT,
   `tid` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -3368,12 +3340,11 @@ CREATE TABLE `ts_category` (
 
 
 
-# Dump of table ts_comment
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_comment`;
 
-CREATE TABLE `ts_comment` (
+DROP TABLE IF EXISTS `wk_comment`;
+
+CREATE TABLE `wk_comment` (
   `id` int(11) NOT NULL auto_increment,
   `type` char(15) default NULL,
   `appid` int(11) default NULL,
@@ -3393,12 +3364,11 @@ CREATE TABLE `ts_comment` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 
-# Dump of table ts_document
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_document`;
 
-CREATE TABLE `ts_document` (
+DROP TABLE IF EXISTS `wk_document`;
+
+CREATE TABLE `wk_document` (
   `document_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `content` text,
@@ -3412,21 +3382,19 @@ CREATE TABLE `ts_document` (
   PRIMARY KEY (`document_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-/*!40000 ALTER TABLE `ts_document` DISABLE KEYS */;
-INSERT INTO `ts_document` (`title`,`content`,`author_id`,`last_editor_id`,`is_active`,`is_on_footer`,`ctime`,`mtime`,`display_order`)
+
+INSERT INTO `wk_document` (`title`,`content`,`author_id`,`last_editor_id`,`is_active`,`is_on_footer`,`ctime`,`mtime`,`display_order`)
 VALUES
-	('官方社区','http://t.thinksns.com',4,4,1,1,1292213500,1292213500,1),
-	('关于我们','&nbsp;&nbsp;&nbsp; ThinkSNS是国内最具潜力的互联网产品服务公司，为客户提供社会化网络产品、技术和服务在内的一系列解决方案和平台化网络建设。<br>&nbsp;&nbsp;&nbsp; ThinkSNS从一开始是就秉承优秀的软件开源思想，注重知识分享和团队协作，以一种开放、共赢、互利和友好的态度面向所有需要ThinkSNS，支持ThinkSNS，喜爱ThinkSNS的个人和社会团体。<br>&nbsp;&nbsp;&nbsp; ThinkSNS不单单是一个人性化的产品，同时也是整个公司灵魂化的象征，我们积聚创新，不断成长和完备，汲取更多先进性的技术革新，创造更具价值的优势产品，为更多ThinkSNS的应用爱好者提供动力支持和技术源泉。',4,4,1,1,1292213562,1292215236,2);
-
-/*!40000 ALTER TABLE `ts_document` ENABLE KEYS */;
+	('官方社区','http://www.wekit.org',4,4,1,1,1292213500,1292213500,1),
+	('关于我们','&nbsp;&nbsp;&nbsp;wekit 致力于各种网站开发',4,4,1,1,1292213562,1292215236,2);
 
 
-# Dump of table ts_expression
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_expression`;
 
-CREATE TABLE `ts_expression` (
+
+DROP TABLE IF EXISTS `wk_expression`;
+
+CREATE TABLE `wk_expression` (
   `expression_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL DEFAULT 'miniblog',
@@ -3435,8 +3403,8 @@ CREATE TABLE `ts_expression` (
   PRIMARY KEY (`expression_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-/*!40000 ALTER TABLE `ts_expression` DISABLE KEYS */;
-INSERT INTO `ts_expression` (`expression_id`,`title`,`type`,`emotion`,`filename`)
+
+INSERT INTO `wk_expression` (`expression_id`,`title`,`type`,`emotion`,`filename`)
 VALUES
 	(1,'拥抱','miniblog','[拥抱]','hug.gif'),
 	(2,'示爱','miniblog','[示爱]','kiss.gif'),
@@ -3457,15 +3425,10 @@ VALUES
 	(17,'调皮','miniblog','[调皮]','tongue.gif'),
 	(18,'胜利','miniblog','[胜利]','victory.gif');
 
-/*!40000 ALTER TABLE `ts_expression` ENABLE KEYS */;
 
+DROP TABLE IF EXISTS `wk_feed`;
 
-# Dump of table ts_feed
-# ------------------------------------------------------------;
-
-DROP TABLE IF EXISTS `ts_feed`;
-
-CREATE TABLE `ts_feed` (
+CREATE TABLE `wk_feed` (
   `feed_id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL,
   `data` text NOT NULL,
@@ -3476,12 +3439,11 @@ CREATE TABLE `ts_feed` (
 
 
 
-# Dump of table ts_friend
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_friend`;
 
-CREATE TABLE `ts_friend` (
+DROP TABLE IF EXISTS `wk_friend`;
+
+CREATE TABLE `wk_friend` (
   `friend_id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL,
   `friend_uid` int(11) NOT NULL,
@@ -3494,12 +3456,9 @@ CREATE TABLE `ts_friend` (
 
 
 
-# Dump of table ts_friend_group
-# ------------------------------------------------------------;
+DROP TABLE IF EXISTS `wk_friend_group`;
 
-DROP TABLE IF EXISTS `ts_friend_group`;
-
-CREATE TABLE `ts_friend_group` (
+CREATE TABLE `wk_friend_group` (
   `friend_group_id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL,
@@ -3508,12 +3467,10 @@ CREATE TABLE `ts_friend_group` (
 
 
 
-# Dump of table ts_friend_group_link
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_friend_group_link`;
+DROP TABLE IF EXISTS `wk_friend_group_link`;
 
-CREATE TABLE `ts_friend_group_link` (
+CREATE TABLE `wk_friend_group_link` (
   `uid` int(11) NOT NULL,
   `friend_uid` int(11) NOT NULL,
   `friend_uname` varchar(255) NOT NULL,
@@ -3523,12 +3480,9 @@ CREATE TABLE `ts_friend_group_link` (
 
 
 
-# Dump of table ts_invitecode
-# ------------------------------------------------------------;
+DROP TABLE IF EXISTS `wk_invitecode`;
 
-DROP TABLE IF EXISTS `ts_invitecode`;
-
-CREATE TABLE `ts_invitecode` (
+CREATE TABLE `wk_invitecode` (
   `invite_code_id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL,
   `code` varchar(120) NOT NULL,
@@ -3540,12 +3494,10 @@ CREATE TABLE `ts_invitecode` (
 
 
 
-# Dump of table ts_login
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_login`;
+DROP TABLE IF EXISTS `wk_login`;
 
-CREATE TABLE `ts_login` (
+CREATE TABLE `wk_login` (
   `login_id` int(11) NOT NULL auto_increment,
   `uid` int(11) NOT NULL,
   `type_uid` varchar(255) NOT NULL default '',
@@ -3558,12 +3510,11 @@ CREATE TABLE `ts_login` (
 
 
 
-# Dump of table ts_login_record
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_login_record`;
 
-CREATE TABLE `ts_login_record` (
+DROP TABLE IF EXISTS `wk_login_record`;
+
+CREATE TABLE `wk_login_record` (
   `login_record_id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) DEFAULT NULL,
   `ip` varchar(15) DEFAULT NULL,
@@ -3574,12 +3525,10 @@ CREATE TABLE `ts_login_record` (
 
 
 
-# Dump of table ts_message
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_message`;
+DROP TABLE IF EXISTS `wk_message`;
 
-CREATE TABLE `ts_message` (
+CREATE TABLE `wk_message` (
   `message_id` int(11) NOT NULL AUTO_INCREMENT,
   `from_uid` int(11) NOT NULL,
   `to_uid` int(11) NOT NULL,
@@ -3595,12 +3544,10 @@ CREATE TABLE `ts_message` (
 
 
 
-# Dump of table ts_myop_friendlog
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_myop_friendlog`;
+DROP TABLE IF EXISTS `wk_myop_friendlog`;
 
-CREATE TABLE `ts_myop_friendlog` (
+CREATE TABLE `wk_myop_friendlog` (
   `uid` int(11) NOT NULL,
   `fuid` int(11) NOT NULL,
   `action` varchar(255) NOT NULL,
@@ -3609,12 +3556,9 @@ CREATE TABLE `ts_myop_friendlog` (
 
 
 
-# Dump of table ts_myop_myapp
-# ------------------------------------------------------------;
+DROP TABLE IF EXISTS `wk_myop_myapp`;
 
-DROP TABLE IF EXISTS `ts_myop_myapp`;
-
-CREATE TABLE `ts_myop_myapp` (
+CREATE TABLE `wk_myop_myapp` (
   `appid` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `appname` varchar(60) NOT NULL DEFAULT '',
   `narrow` tinyint(1) NOT NULL DEFAULT '0',
@@ -3628,12 +3572,9 @@ CREATE TABLE `ts_myop_myapp` (
 
 
 
-# Dump of table ts_myop_myinvite
-# ------------------------------------------------------------;
+DROP TABLE IF EXISTS `wk_myop_myinvite`;
 
-DROP TABLE IF EXISTS `ts_myop_myinvite`;
-
-CREATE TABLE `ts_myop_myinvite` (
+CREATE TABLE `wk_myop_myinvite` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `typename` varchar(100) NOT NULL DEFAULT '',
   `appid` mediumint(8) NOT NULL DEFAULT '0',
@@ -3651,12 +3592,11 @@ CREATE TABLE `ts_myop_myinvite` (
 
 
 
-# Dump of table ts_myop_userapp
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_myop_userapp`;
 
-CREATE TABLE `ts_myop_userapp` (
+DROP TABLE IF EXISTS `wk_myop_userapp`;
+
+CREATE TABLE `wk_myop_userapp` (
   `uid` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `appid` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `appname` varchar(60) NOT NULL DEFAULT '',
@@ -3675,12 +3615,10 @@ CREATE TABLE `ts_myop_userapp` (
 
 
 
-# Dump of table ts_myop_userappfield
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_myop_userappfield`;
+DROP TABLE IF EXISTS `wk_myop_userappfield`;
 
-CREATE TABLE `ts_myop_userappfield` (
+CREATE TABLE `wk_myop_userappfield` (
   `uid` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `appid` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `profilelink` text NOT NULL,
@@ -3690,12 +3628,10 @@ CREATE TABLE `ts_myop_userappfield` (
 
 
 
-# Dump of table ts_myop_userlog
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_myop_userlog`;
+DROP TABLE IF EXISTS `wk_myop_userlog`;
 
-CREATE TABLE `ts_myop_userlog` (
+CREATE TABLE `wk_myop_userlog` (
   `uid` int(11) NOT NULL DEFAULT '0',
   `action` varchar(255) NOT NULL,
   `type` tinyint(1) NOT NULL DEFAULT '0',
@@ -3704,12 +3640,10 @@ CREATE TABLE `ts_myop_userlog` (
 
 
 
-# Dump of table ts_node
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_node`;
+DROP TABLE IF EXISTS `wk_node`;
 
-CREATE TABLE `ts_node` (
+CREATE TABLE `wk_node` (
   `node_id` int(11) NOT NULL AUTO_INCREMENT,
   `app_name` varchar(255) NOT NULL,
   `app_alias` varchar(255) DEFAULT NULL,
@@ -3722,20 +3656,14 @@ CREATE TABLE `ts_node` (
   PRIMARY KEY (`node_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-/*!40000 ALTER TABLE `ts_node` DISABLE KEYS */;
-INSERT INTO `ts_node` (`app_name`,`app_alias`,`mod_name`,`mod_alias`,`act_name`,`act_alias`,`parent_node_id`,`description`)
+INSERT INTO `wk_node` (`app_name`,`app_alias`,`mod_name`,`mod_alias`,`act_name`,`act_alias`,`parent_node_id`,`description`)
 VALUES
 	('admin','管理后台','*','全部','*','全部',0,'在“权限管理”中将本节点赋予某个用户组，它就能访问管理后台了');
 
-/*!40000 ALTER TABLE `ts_node` ENABLE KEYS */;
 
+DROP TABLE IF EXISTS `wk_notify`;
 
-# Dump of table ts_notify
-# ------------------------------------------------------------;
-
-DROP TABLE IF EXISTS `ts_notify`;
-
-CREATE TABLE `ts_notify` (
+CREATE TABLE `wk_notify` (
   `notify_id` int(11) NOT NULL auto_increment,
   `from` int(11) NOT NULL,
   `receive` int(11) NOT NULL,
@@ -3750,12 +3678,10 @@ CREATE TABLE `ts_notify` (
 
 
 
-# Dump of table ts_space
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_space`;
+DROP TABLE IF EXISTS `wk_space`;
 
-CREATE TABLE `ts_space` (
+CREATE TABLE `wk_space` (
   `uid` int(11) unsigned NOT NULL DEFAULT '0',
   `hit` int(11) unsigned NOT NULL DEFAULT '0',
   `setting` text NOT NULL,
@@ -3766,12 +3692,10 @@ CREATE TABLE `ts_space` (
 
 
 
-# Dump of table ts_system_data
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_system_data`;
+DROP TABLE IF EXISTS `wk_system_data`;
 
-CREATE TABLE `ts_system_data` (
+CREATE TABLE `wk_system_data` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `uid` int(11) unsigned NOT NULL DEFAULT '0',
   `list` char(30) DEFAULT 'default',
@@ -3782,15 +3706,15 @@ CREATE TABLE `ts_system_data` (
   UNIQUE KEY `list` (`list`,`key`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-/*!40000 ALTER TABLE `ts_system_data` DISABLE KEYS */;
-INSERT INTO `ts_system_data` (`uid`,`list`,`key`,`value`,`mtime`)
+
+INSERT INTO `wk_system_data` (`uid`,`list`,`key`,`value`,`mtime`)
 VALUES
-	(0,'siteopt','site_name','s:8:\"ThinkSNS\";','2010-11-29 17:40:14'),
+	(0,'siteopt','site_name','s:8:\"wekit\";','2010-11-29 17:40:14'),
 	(0,'siteopt','site_slogan','s:21:\"社会化动力平台\";','2010-11-29 17:40:14'),
 	(0,'siteopt','site_closed','i:0;','2010-11-29 17:40:14'),
 	(0,'siteopt','site_verify','a:1:{i:0;s:8:\"register\";}','2010-11-29 17:40:14'),
 	(0,'siteopt','site_user_domain_on','s:1:\"1\";','2010-12-20 18:06:59'),
-	(0,'siteopt','site_system_version','s:12:"ThinkSNS 2.5";','2010-12-31 15:46:44'),
+	(0,'siteopt','site_system_version','s:12:"wekit";','2010-12-31 15:46:44'),
 	(0,'siteopt','site_system_version_number','s:5:"25367";','2010-12-31 15:46:44'),
 	(0,'siteopt','expression','s:8:\"miniblog\";','2010-11-29 17:40:14'),
 	(0,'register','register_type','s:4:\"open\";','2010-12-06 12:08:56'),
@@ -3806,9 +3730,9 @@ VALUES
 	(0,'inviteset','__hash__','s:32:\"de6fa0dbb82ebd33d9d824d757332c1e\";','2010-11-26 11:51:05'),
 	(0,'default','default','15','2010-11-19 11:57:11'),
 	(0,'siteopt','site_closed_reason','s:0:\"\";','2010-11-29 17:40:14'),
-	(0,'siteopt','site_header_keywords','s:12:\"ThinkSNS|SNS\";','2010-11-29 17:40:14'),
-	(0,'siteopt','site_header_description','s:19:\"ThinkSNS|SNS|Sociax\";','2010-11-29 17:40:14'),
-	(0,'siteopt','site_icp','s:57:"智士软件（北京）有限公司 京ICP备04000001号";','2010-11-29 17:40:14'),
+	(0,'siteopt','site_header_keywords','s:12:\"Wekit\";','2010-11-29 17:40:14'),
+	(0,'siteopt','site_header_description','s:19:\"Wekit\";','2010-11-29 17:40:14'),
+	(0,'siteopt','site_icp','s:57:"";','2010-11-29 17:40:14'),
 	(0,'siteopt','site_anonymous','s:1:\"1\";','2010-11-29 17:40:14'),
 	(0,'siteopt','site_anonymous_square','s:1:\"1\";','2010-11-29 17:40:14'),
 	(0,'siteopt','site_anonymous_search','s:1:\"0\";','2010-11-29 17:40:14'),
@@ -3818,16 +3742,13 @@ VALUES
 	(0,'attach','attach_allow_extension','s:59:\"jpg,gif,png,jpeg,bmp,zip,rar,doc,xls,ppt,docx,xlsx,pptx,pdf\";','2010-11-29 17:41:15'),
 	(0,'attach','__hash__','s:32:\"3d1ba92bca03cacb92bb32379f880356\";','2010-11-29 17:41:15'),
 	(0,'announcement','is_open','s:1:\"1\";','2010-12-13 15:20:06'),
-	(0,'announcement','content','s:20:"欢迎使用ThinkSNS";','2010-12-13 15:20:06');
+	(0,'announcement','content','s:20:"欢迎使用wekit";','2010-12-13 15:20:06');
 
-/*!40000 ALTER TABLE `ts_system_data` ENABLE KEYS */;
 
-# Dump of table ts_tag
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_tag`;
+DROP TABLE IF EXISTS `wk_tag`;
 
-CREATE TABLE `ts_tag` (
+CREATE TABLE `wk_tag` (
   `tag_id` int(11) NOT NULL AUTO_INCREMENT,
   `tag_name` varchar(120) NOT NULL,
   PRIMARY KEY (`tag_id`)
@@ -3835,12 +3756,10 @@ CREATE TABLE `ts_tag` (
 
 
 
-# Dump of table ts_template
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_template`;
+DROP TABLE IF EXISTS `wk_template`;
 
-CREATE TABLE `ts_template` (
+CREATE TABLE `wk_template` (
   `tpl_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `alias` varchar(255) DEFAULT NULL,
@@ -3854,19 +3773,15 @@ CREATE TABLE `ts_template` (
   PRIMARY KEY (`tpl_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-/*!40000 ALTER TABLE `ts_template` DISABLE KEYS */;
-INSERT INTO `ts_template` (`tpl_id`,`name`,`alias`,`title`,`body`,`lang`,`type`,`type2`,`is_cache`,`ctime`)
+INSERT INTO `wk_template` (`tpl_id`,`name`,`alias`,`title`,`body`,`lang`,`type`,`type2`,`is_cache`,`ctime`)
 VALUES
 	(1,'invite_register','邀请注册','{actor_name}邀请您加入{site_name}','亲爱的{email}您好，\r\n{actor}邀请您加入{site}','zh','invite','',1,1282554257);
 
-/*!40000 ALTER TABLE `ts_template` ENABLE KEYS */;
 
-# Dump of table ts_template_record
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_template_record`;
+DROP TABLE IF EXISTS `wk_template_record`;
 
-CREATE TABLE `ts_template_record` (
+CREATE TABLE `wk_template_record` (
   `tpl_record_id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) DEFAULT NULL,
   `tpl_name` varchar(255) NOT NULL DEFAULT '',
@@ -3880,12 +3795,11 @@ CREATE TABLE `ts_template_record` (
 
 
 
-# Dump of table ts_user
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_user`;
 
-CREATE TABLE `ts_user` (
+DROP TABLE IF EXISTS `wk_user`;
+
+CREATE TABLE `wk_user` (
   `uid` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
@@ -3912,12 +3826,10 @@ CREATE TABLE `ts_user` (
 
 
 
-# Dump of table ts_user_app
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_user_app`;
+DROP TABLE IF EXISTS `wk_user_app`;
 
-CREATE TABLE `ts_user_app` (
+CREATE TABLE `wk_user_app` (
   `user_app_id` int(11) unsigned NOT NULL auto_increment,
   `app_id` int(11) NOT NULL,
   `uid` int(11) NOT NULL,
@@ -3931,12 +3843,11 @@ CREATE TABLE `ts_user_app` (
 
 
 
-# Dump of table ts_user_blacklist
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_user_blacklist`;
 
-CREATE TABLE `ts_user_blacklist` (
+DROP TABLE IF EXISTS `wk_user_blacklist`;
+
+CREATE TABLE `wk_user_blacklist` (
   `uid` int(11) NOT NULL,
   `fid` int(11) NOT NULL,
   `ctime` int(11) NOT NULL
@@ -3944,12 +3855,10 @@ CREATE TABLE `ts_user_blacklist` (
 
 
 
-# Dump of table ts_user_count
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_user_count`;
+DROP TABLE IF EXISTS `wk_user_count`;
 
-CREATE TABLE `ts_user_count` (
+CREATE TABLE `wk_user_count` (
   `uid` int(11) NOT NULL,
   `atme` mediumint(6) NOT NULL,
   `comment` mediumint(6) NOT NULL,
@@ -3958,12 +3867,10 @@ CREATE TABLE `ts_user_count` (
 
 
 
-# Dump of table ts_user_group
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_user_group`;
+DROP TABLE IF EXISTS `wk_user_group`;
 
-CREATE TABLE `ts_user_group` (
+CREATE TABLE `wk_user_group` (
   `user_group_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL DEFAULT '',
   `ctime` int(11) DEFAULT NULL,
@@ -3971,19 +3878,16 @@ CREATE TABLE `ts_user_group` (
   PRIMARY KEY (`user_group_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-/*!40000 ALTER TABLE `ts_user_group` DISABLE KEYS */;
-INSERT INTO `ts_user_group` (`user_group_id`,`title`,`ctime`,`icon`)
+
+INSERT INTO `wk_user_group` (`user_group_id`,`title`,`ctime`,`icon`)
 VALUES
 	(1,'管理员',1291136345,'v_05.gif');
 
-/*!40000 ALTER TABLE `ts_user_group` ENABLE KEYS */;
 
-# Dump of table ts_user_group_link
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_user_group_link`;
+DROP TABLE IF EXISTS `wk_user_group_link`;
 
-CREATE TABLE `ts_user_group_link` (
+CREATE TABLE `wk_user_group_link` (
   `user_gorup_link_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_group_id` int(11) NOT NULL,
   `user_group_title` varchar(255) DEFAULT NULL,
@@ -3994,31 +3898,29 @@ CREATE TABLE `ts_user_group_link` (
 
 
 
-# Dump of table ts_user_group_popedom
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_user_group_popedom`;
 
-CREATE TABLE `ts_user_group_popedom` (
+DROP TABLE IF EXISTS `wk_user_group_popedom`;
+
+CREATE TABLE `wk_user_group_popedom` (
   `user_group_popedom_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_group_id` int(11) NOT NULL,
   `node_id` int(11) NOT NULL,
   PRIMARY KEY (`user_group_popedom_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-/*!40000 ALTER TABLE `ts_user_group_popedom` DISABLE KEYS */;
-INSERT INTO `ts_user_group_popedom` (`user_group_popedom_id`,`user_group_id`,`node_id`)
+
+INSERT INTO `wk_user_group_popedom` (`user_group_popedom_id`,`user_group_id`,`node_id`)
 VALUES
 	(1,1,1);
 
-/*!40000 ALTER TABLE `ts_user_group_popedom` ENABLE KEYS */;
 
-# Dump of table ts_user_online
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_user_online`;
 
-CREATE TABLE `ts_user_online` (
+
+DROP TABLE IF EXISTS `wk_user_online`;
+
+CREATE TABLE `wk_user_online` (
   `uid` int(11) NOT NULL,
   `ctime` int(11) NOT NULL,
   UNIQUE KEY `uid` (`uid`)
@@ -4026,12 +3928,10 @@ CREATE TABLE `ts_user_online` (
 
 
 
-# Dump of table ts_user_privacy
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_user_privacy`;
+DROP TABLE IF EXISTS `wk_user_privacy`;
 
-CREATE TABLE `ts_user_privacy` (
+CREATE TABLE `wk_user_privacy` (
   `uid` int(11) NOT NULL,
   `key` varchar(120) NOT NULL,
   `value` varchar(120) NOT NULL,
@@ -4041,12 +3941,11 @@ CREATE TABLE `ts_user_privacy` (
 
 
 
-# Dump of table ts_user_profile
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_user_profile`;
 
-CREATE TABLE `ts_user_profile` (
+DROP TABLE IF EXISTS `wk_user_profile`;
+
+CREATE TABLE `wk_user_profile` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL,
   `module` varchar(150) NOT NULL,
@@ -4057,12 +3956,10 @@ CREATE TABLE `ts_user_profile` (
 
 
 
-# Dump of table ts_user_set
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_user_set`;
+DROP TABLE IF EXISTS `wk_user_set`;
 
-CREATE TABLE `ts_user_set` (
+CREATE TABLE `wk_user_set` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fieldkey` varchar(120) NOT NULL,
   `fieldname` varchar(120) NOT NULL,
@@ -4072,8 +3969,8 @@ CREATE TABLE `ts_user_set` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-/*!40000 ALTER TABLE `ts_user_set` DISABLE KEYS */;
-INSERT INTO `ts_user_set` (`id`,`fieldkey`,`fieldname`,`status`,`module`,`showspace`)
+
+INSERT INTO `wk_user_set` (`id`,`fieldkey`,`fieldname`,`status`,`module`,`showspace`)
 VALUES
 	(3,'name','名字',1,'intro',1),
 	(4,'summary','我的简介',1,'intro',0),
@@ -4090,14 +3987,11 @@ VALUES
 	(15,'msn','MSN',1,'contact',0),
 	(16,'blood','血型',1,'intro',0);
 
-/*!40000 ALTER TABLE `ts_user_set` ENABLE KEYS */;
 
-# Dump of table ts_user_tag
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_user_tag`;
+DROP TABLE IF EXISTS `wk_user_tag`;
 
-CREATE TABLE `ts_user_tag` (
+CREATE TABLE `wk_user_tag` (
   `user_tag_id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL,
   `tag_id` int(11) NOT NULL,
@@ -4106,12 +4000,11 @@ CREATE TABLE `ts_user_tag` (
 
 
 
-# Dump of table ts_validation
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_validation`;
 
-CREATE TABLE `ts_validation` (
+DROP TABLE IF EXISTS `wk_validation`;
+
+CREATE TABLE `wk_validation` (
   `validation_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `type` varchar(255) DEFAULT NULL,
   `from_uid` int(11) NOT NULL DEFAULT '0',
@@ -4126,12 +4019,11 @@ CREATE TABLE `ts_validation` (
 
 
 
-# Dump of table ts_weibo
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_weibo`;
 
-CREATE TABLE `ts_weibo` (
+DROP TABLE IF EXISTS `wk_weibo`;
+
+CREATE TABLE `wk_weibo` (
   `weibo_id` int(11) NOT NULL auto_increment,
   `uid` int(11) NOT NULL,
   `content` text NOT NULL,
@@ -4153,12 +4045,11 @@ CREATE TABLE `ts_weibo` (
 
 
 
-# Dump of table ts_weibo_atme
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_weibo_atme`;
 
-CREATE TABLE `ts_weibo_atme` (
+DROP TABLE IF EXISTS `wk_weibo_atme`;
+
+CREATE TABLE `wk_weibo_atme` (
   `uid` int(11) NOT NULL,
   `weibo_id` int(11) NOT NULL,
   UNIQUE KEY `uid` (`uid`,`weibo_id`),
@@ -4167,12 +4058,11 @@ CREATE TABLE `ts_weibo_atme` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-# Dump of table ts_weibo_comment
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_weibo_comment`;
 
-CREATE TABLE `ts_weibo_comment` (
+DROP TABLE IF EXISTS `wk_weibo_comment`;
+
+CREATE TABLE `wk_weibo_comment` (
   `comment_id` int(11) NOT NULL auto_increment,
   `uid` int(11) NOT NULL,
   `reply_comment_id` int(11) NOT NULL,
@@ -4187,12 +4077,10 @@ CREATE TABLE `ts_weibo_comment` (
 
 
 
-# Dump of table ts_weibo_favorite
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_weibo_favorite`;
+DROP TABLE IF EXISTS `wk_weibo_favorite`;
 
-CREATE TABLE `ts_weibo_favorite` (
+CREATE TABLE `wk_weibo_favorite` (
   `uid` int(11) NOT NULL,
   `weibo_id` int(11) NOT NULL,
   PRIMARY KEY (`uid`,`weibo_id`)
@@ -4200,12 +4088,10 @@ CREATE TABLE `ts_weibo_favorite` (
 
 
 
-# Dump of table ts_weibo_follow
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_weibo_follow`;
+DROP TABLE IF EXISTS `wk_weibo_follow`;
 
-CREATE TABLE `ts_weibo_follow` (
+CREATE TABLE `wk_weibo_follow` (
   `follow_id` int(11) NOT NULL auto_increment,
   `uid` int(11) NOT NULL,
   `fid` int(11) NOT NULL,
@@ -4218,12 +4104,10 @@ CREATE TABLE `ts_weibo_follow` (
 
 
 
-# Dump of table ts_weibo_plugin
-# ------------------------------------------------------------;
 
-DROP TABLE IF EXISTS `ts_weibo_plugin`;
+DROP TABLE IF EXISTS `wk_weibo_plugin`;
 
-CREATE TABLE `ts_weibo_plugin` (
+CREATE TABLE `wk_weibo_plugin` (
   `plugin_id` int(11) NOT NULL AUTO_INCREMENT,
   `plugin_name` varchar(120) NOT NULL,
   `icon_pic` varchar(120) NOT NULL,
@@ -4231,21 +4115,16 @@ CREATE TABLE `ts_weibo_plugin` (
   PRIMARY KEY (`plugin_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-/*!40000 ALTER TABLE `ts_weibo_plugin` DISABLE KEYS */;
-INSERT INTO `ts_weibo_plugin` (`plugin_id`,`plugin_name`,`icon_pic`,`plugin_path`)
+INSERT INTO `wk_weibo_plugin` (`plugin_id`,`plugin_name`,`icon_pic`,`plugin_path`)
 VALUES
 	(1,'图片','','image'),
 	(3,'视频','','video'),
 	(4,'音乐','','music');
 
-/*!40000 ALTER TABLE `ts_weibo_plugin` ENABLE KEYS */;
 
-# Dump of table ts_weibo_topic
-# ------------------------------------------------------------;
+DROP TABLE IF EXISTS `wk_weibo_topic`;
 
-DROP TABLE IF EXISTS `ts_weibo_topic`;
-
-CREATE TABLE `ts_weibo_topic` (
+CREATE TABLE `wk_weibo_topic` (
   `topic_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
   `count` int(11) NOT NULL,
@@ -4255,10 +4134,10 @@ CREATE TABLE `ts_weibo_topic` (
   KEY `name` (`name`,`count`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-# 新增ts_credit_setting, ts_credit_type, ts_credit_user表
-DROP TABLE IF EXISTS `ts_credit_setting`;
+# 新增wk_credit_setting, wk_credit_type, wk_credit_user表
+DROP TABLE IF EXISTS `wk_credit_setting`;
 
-CREATE TABLE `ts_credit_setting` (
+CREATE TABLE `wk_credit_setting` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(50) NOT NULL,
   `alias` varchar(255) NOT NULL,
@@ -4269,7 +4148,7 @@ CREATE TABLE `ts_credit_setting` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-INSERT INTO `ts_credit_setting` (`id`,`name`,`alias`,`type`,`info`,`score`,`experience`)
+INSERT INTO `wk_credit_setting` (`id`,`name`,`alias`,`type`,`info`,`score`,`experience`)
 VALUES
     (34,'add_blog','发表博客','blog','{action}{sign}了{score}{typecn}',5,5),
     (37,'invite_friend','邀请好友','register','{action}{sign}了{score}{typecn}',10,10),
@@ -4300,23 +4179,23 @@ VALUES
     (93,'delete_weibo_comment','删除微博评论','weibo','{action}{sign}了{score}{typecn}',-1,-1);
 
 
-DROP TABLE IF EXISTS `ts_credit_type`;
+DROP TABLE IF EXISTS `wk_credit_type`;
 
-CREATE TABLE `ts_credit_type` (
+CREATE TABLE `wk_credit_type` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(50) NOT NULL,
   `alias` varchar(50) NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-INSERT INTO `ts_credit_type` (`name`,`alias`)
+INSERT INTO `wk_credit_type` (`name`,`alias`)
 VALUES
     ('score','积分'),
     ('experience','经验');
 
-DROP TABLE IF EXISTS `ts_credit_user`;
+DROP TABLE IF EXISTS `wk_credit_user`;
 
-CREATE TABLE `ts_credit_user` (
+CREATE TABLE `wk_credit_user` (
   `id` int(11) NOT NULL auto_increment,
   `uid` int(11) NOT NULL,
   `score` int(11) NOT NULL,
@@ -4324,13 +4203,11 @@ CREATE TABLE `ts_credit_user` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-##################################################################################################################
-# 以下为 ThinkSNS 2.1 beta Build 10470 新增的数据表
-# ts_denounce, ts_admin_log, ts_weibo_follow_group, ts_weibo_follow_group_link, ts_weibo_star, ts_weibo_star_group
 
-DROP TABLE IF EXISTS `ts_denounce`;
 
-CREATE TABLE `ts_denounce` (
+DROP TABLE IF EXISTS `wk_denounce`;
+
+CREATE TABLE `wk_denounce` (
   `id` int(11) NOT NULL auto_increment COMMENT '主键ID',
   `from` varchar(255) NOT NULL COMMENT '目前存入各个应用的名称，比如blog,weibo，说明举报的是不同应用下的内容',
   `aid` int(11) NOT NULL COMMENT '记录内容表的主键ID',
@@ -4343,11 +4220,11 @@ CREATE TABLE `ts_denounce` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-#------------------------------------#
 
-DROP TABLE IF EXISTS `ts_admin_log`;
 
-CREATE TABLE `ts_admin_log` (
+DROP TABLE IF EXISTS `wk_admin_log`;
+
+CREATE TABLE `wk_admin_log` (
   `id` int(11) NOT NULL auto_increment COMMENT '主键ID',
   `uid` int(11) NOT NULL COMMENT '操作人UID',
   `type` tinyint(4) NOT NULL,
@@ -4356,11 +4233,11 @@ CREATE TABLE `ts_admin_log` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-#------------------------------------#
 
-DROP TABLE IF EXISTS `ts_weibo_follow_group`;
 
-CREATE TABLE `ts_weibo_follow_group` (
+DROP TABLE IF EXISTS `wk_weibo_follow_group`;
+
+CREATE TABLE `wk_weibo_follow_group` (
   `follow_group_id` int(11) NOT NULL auto_increment,
   `uid` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
@@ -4368,11 +4245,11 @@ CREATE TABLE `ts_weibo_follow_group` (
   PRIMARY KEY  (`follow_group_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-#------------------------------------#
 
-DROP TABLE IF EXISTS `ts_weibo_follow_group_link`;
 
-CREATE TABLE `ts_weibo_follow_group_link` (
+DROP TABLE IF EXISTS `wk_weibo_follow_group_link`;
+
+CREATE TABLE `wk_weibo_follow_group_link` (
   `follow_group_link_id` int(11) NOT NULL auto_increment,
   `follow_group_id` int(11) NOT NULL,
   `follow_id` int(11) NOT NULL,
@@ -4380,11 +4257,10 @@ CREATE TABLE `ts_weibo_follow_group_link` (
   PRIMARY KEY  (`follow_group_link_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-#------------------------------------#
 
-DROP TABLE IF EXISTS `ts_weibo_star`;
+DROP TABLE IF EXISTS `wk_weibo_star`;
 
-CREATE TABLE `ts_weibo_star` (
+CREATE TABLE `wk_weibo_star` (
   `star_id` int(11) NOT NULL auto_increment,
   `star_group_id` int(11) NOT NULL,
   `uid` int(11) NOT NULL,
@@ -4392,11 +4268,11 @@ CREATE TABLE `ts_weibo_star` (
   PRIMARY KEY  (`star_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-#------------------------------------#
 
-DROP TABLE IF EXISTS `ts_weibo_star_group`;
 
-CREATE TABLE `ts_weibo_star_group` (
+DROP TABLE IF EXISTS `wk_weibo_star_group`;
+
+CREATE TABLE `wk_weibo_star_group` (
   `star_group_id` int(11) NOT NULL auto_increment,
   `top_group_id` int(11) NOT NULL default '0',
   `title` varchar(255) NOT NULL,
@@ -4405,25 +4281,21 @@ CREATE TABLE `ts_weibo_star_group` (
   PRIMARY KEY  (`star_group_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-##################################################################################################################
-# 以下为 ThinkSNS 2.1 Build 10920 新增的数据表
-# 
-DROP TABLE IF EXISTS `ts_ucenter_user_link`;
 
-CREATE TABLE `ts_ucenter_user_link` (
+
+DROP TABLE IF EXISTS `wk_ucenter_user_link`;
+
+CREATE TABLE `wk_ucenter_user_link` (
   `uid` int(11) NOT NULL,
   `uc_uid` mediumint(8) NOT NULL,
   `uc_username` char(15) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-##################################################################################################################
-# 以下为 ThinkSNS 2.2 新增的数据表
-# ts_invite_record
-#
 
-DROP TABLE IF EXISTS `ts_invite_record`;
 
-CREATE TABLE IF NOT EXISTS `ts_invite_record` (
+DROP TABLE IF EXISTS `wk_invite_record`;
+
+CREATE TABLE IF NOT EXISTS `wk_invite_record` (
   `invite_record_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `uid` int(11) unsigned NOT NULL,
   `fid` int(11) unsigned NOT NULL,
@@ -4433,22 +4305,11 @@ CREATE TABLE IF NOT EXISTS `ts_invite_record` (
   KEY `ctime` (`ctime`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
 
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
-##################################################################################################################
-# 以下为 ThinkSNS 2.3 新增的数据表
-# ts_weibo_topics
-#
 
-DROP TABLE IF EXISTS `ts_weibo_topics`;
+DROP TABLE IF EXISTS `wk_weibo_topics`;
 
-CREATE TABLE IF NOT EXISTS `ts_weibo_topics` (
+CREATE TABLE IF NOT EXISTS `wk_weibo_topics` (
   `topics_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `topic_id` int(11) unsigned NOT NULL,
   `domain` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -4463,14 +4324,11 @@ CREATE TABLE IF NOT EXISTS `ts_weibo_topics` (
   UNIQUE KEY `page` (`domain`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 
-##################################################################################################################
-# ThinkSNS 2.5 新增的表
-# ts_addons
-#
 
-DROP TABLE IF EXISTS `ts_addons`;
 
-CREATE TABLE IF NOT EXISTS `ts_addons` (
+DROP TABLE IF EXISTS `wk_addons`;
+
+CREATE TABLE IF NOT EXISTS `wk_addons` (
   `addonId` int(4) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
   `pluginName` varchar(255) NOT NULL DEFAULT '',
@@ -4486,9 +4344,9 @@ CREATE TABLE IF NOT EXISTS `ts_addons` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 
 
-DROP TABLE IF EXISTS `ts_weibo_attach`;
+DROP TABLE IF EXISTS `wk_weibo_attach`;
 
-CREATE TABLE IF NOT EXISTS `ts_weibo_attach` (
+CREATE TABLE IF NOT EXISTS `wk_weibo_attach` (
   `weibo_id` int(11) NOT NULL,
   `attach_id` int(11) NOT NULL,
   `uid` int(11) NOT NULL,
@@ -4499,9 +4357,9 @@ CREATE TABLE IF NOT EXISTS `ts_weibo_attach` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='微博附件表';
 
 
-DROP TABLE IF EXISTS `ts_user_data`;
+DROP TABLE IF EXISTS `wk_user_data`;
 
-CREATE TABLE IF NOT EXISTS `ts_user_data` (
+CREATE TABLE IF NOT EXISTS `wk_user_data` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL,
   `key` varchar(50) NOT NULL,
@@ -4511,9 +4369,9 @@ CREATE TABLE IF NOT EXISTS `ts_user_data` (
   UNIQUE KEY `user-key` (`uid`,`key`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
-DROP TABLE IF EXISTS `ts_message_content`;
+DROP TABLE IF EXISTS `wk_message_content`;
 
-CREATE TABLE `ts_message_content` (
+CREATE TABLE `wk_message_content` (
   `message_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `list_id` int(11) unsigned NOT NULL,
   `from_uid` int(11) unsigned NOT NULL,
@@ -4525,9 +4383,9 @@ CREATE TABLE `ts_message_content` (
   KEY `list_id_2` (`list_id`,`mtime`)
 ) ENGINE=MyISAM AUTO_INCREMENT=84 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `ts_message_list`;
+DROP TABLE IF EXISTS `wk_message_list`;
 
-CREATE TABLE `ts_message_list` (
+CREATE TABLE `wk_message_list` (
   `list_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `from_uid` int(11) unsigned NOT NULL,
   `type` tinyint(1) unsigned NOT NULL DEFAULT '0',
@@ -4542,9 +4400,9 @@ CREATE TABLE `ts_message_list` (
   KEY `from_uid` (`from_uid`,`mtime`)
 ) ENGINE=MyISAM AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `ts_message_member`;
+DROP TABLE IF EXISTS `wk_message_member`;
 
-CREATE TABLE `ts_message_member` (
+CREATE TABLE `wk_message_member` (
   `list_id` int(11) unsigned NOT NULL,
   `member_uid` int(11) unsigned NOT NULL,
   `new` smallint(8) unsigned NOT NULL DEFAULT '0',
@@ -4557,8 +4415,8 @@ CREATE TABLE `ts_message_member` (
   KEY `list_ctime` (`list_ctime`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `ts_weibo_topic_link`;
-CREATE TABLE `ts_weibo_topic_link` (
+DROP TABLE IF EXISTS `wk_weibo_topic_link`;
+CREATE TABLE `wk_weibo_topic_link` (
   `weibo_topic_id` int(11) NOT NULL auto_increment,
   `weibo_id` int(11) NOT NULL,
   `topic_id` int(11) NOT NULL,

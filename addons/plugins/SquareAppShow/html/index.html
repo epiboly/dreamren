@@ -5,9 +5,10 @@
       <dd>
         <volist name="apps_list" id="vo">
           <php>if (in_array($vo['app_name'], $apps_show_list)) {</php>
-	        <label><input name="{$vo['app_name']}" type="checkbox" value="1" <if condition="$$vo['app_name']">checked</if>
-	        <php>if (!$vo['status']) {</php>disabled
-	        <php>}</php> />{$vo['app_alias']}</label>
+	        <label><input name="{$vo['app_name']}" type="checkbox" value="1" 
+	        <php>if($$vo['app_name'] != 0 && $vo['status']!= 0 ){</php> checked ='true' <php>}</php>
+	        <php>if($vo['status']==0){</php> disabled="disabled" <php>}</php>
+	        />{$vo['app_alias']} </label>
           <php>}</php>
 		</volist>
         <br />(说明：“灰色选框”表示该应用未安装或已关闭)
