@@ -1,8 +1,8 @@
 <?php
 class LoginAddons extends NormalAddons{
 	protected $version = "1.0";
-	protected $author  = "冷浩然,杨德升,陈伟川";
-	protected $site    = "t.thinksns.com";
+	protected $author  = "黄卫立";
+	protected $site    = "www.wekit.org";
 	protected $info    = "同步登录其他微博系统";
     protected $pluginName = "微博同步";
     protected $tsVersion = '2.5';

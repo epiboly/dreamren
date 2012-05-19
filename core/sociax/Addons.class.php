@@ -67,7 +67,7 @@ class Addons
     }
 
     static public function addonsHook($addonsName,$name,$param=array(),$admin = false){
-
+		
         //$addonsName = ucfirst($addonsName)."Hooks";
         //检查插件类型
         $dirName = ADDON_PATH.'/plugins';

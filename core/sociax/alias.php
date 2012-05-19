@@ -19,8 +19,7 @@ alias_import(array(
     'TagLib'		=>	THINK_PATH.'/Template/TagLib.class.php',
     'TagLibCx'		=>	THINK_PATH.'/Template/TagLib/TagLibCx.class.php',
     'AdvModel'		=>	THINK_PATH.'/Lib/Think/Core/Model/AdvModel.class.php',
-	//'Widget'		=>	THINK_PATH.'/Lib/Think/Util/Widget.class.php',
-	//'Bahivior'		=>	THINK_PATH.'/Lib/Think/Util/Behavior.class.php',
+
 	'Cache'			=>	THINK_PATH.'/Lib/Think/Util/Cache.class.php',
 	'HtmlCache'		=>	THINK_PATH.'/Lib/Think/Util/HtmlCache.class.php',
 	/* 修改过的 */

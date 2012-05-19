@@ -20,7 +20,7 @@ return array(
     'DB_FIELDS_CACHE'	=> true,
 
 	/*
-	 * 页面缓存
+	 * 页面缓存 
 	 */
 	// 是否缓存模版的包含页面
 	'TMPL_CACHE_ON'		=> false,

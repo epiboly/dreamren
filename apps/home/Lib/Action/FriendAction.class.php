@@ -8,23 +8,14 @@ class FriendAction extends Action {
 	
 	public function index() {
 		$users = M('user')->field('`uid`,`email`,`uname`')->findAll();
-		$this->assign('users', $users);
-//		dump($users);
-		
+		$this->assign('users', $users);	
 		$friend = model('Friend')->getFriendList($this->mid);
 		$this->assign($friend);
-//		dump($friend);
-		
 		$fuids  = getSubByKey($friend['data'], 'friend_uid');
-//		dump($fuids);
 		$group  = model('Friend')->getGroupOfFriend($this->mid, $fuids);
 		$this->assign('group', $group);
-//		dump($group);
-		
 		$groups = model('Friend')->getGroupList($this->mid, true);
 		$this->assign('groups', $groups);
-//		dump($groups);
-//		exit;
 		$this->display();
 	}
 	
@@ -53,9 +44,6 @@ class FriendAction extends Action {
 		//添加好友
 		$res = model('Friend')->addFriend($this->mid, $fuid, $gid, $this->require_authorization, t($_POST['message']));
 		if ($res) {
-			//发送通知
-			//发送动态
-			//添加积分
 			echo 1;
 		}else {
 			echo 0;

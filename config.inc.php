@@ -19,7 +19,7 @@ return array(
 	'SECURE_CODE'       =>  'SECURE13367',
 
 	// 默认应用
-    'DEFAULT_APPS'		=> array('admin', 'home', 'weibo'),
+    'DEFAULT_APPS'		=> array('admin', 'home', 'weibo','services'),
 
     // 是否开启URL Rewrite
 	'URL_ROUTER_ON'		=> false,

@@ -12,13 +12,10 @@ class AccountAction extends Action
     function _initialize(){
         $this->pUser = D('UserProfile');
         $this->pUser->uid = $this->mid;
-
-        // 是否启用个性化域名
         $is_domain_on = model('Xdata')->lget('siteopt');
         $is_domain_on = $is_domain_on['site_user_domain_on'];
 
         $menu[] = array( 'act' => 'index',		'name' => L('personal_profile') );
-		//$menu[] = array( 'act' => 'avatar',		'name' => L('face_setting') );
         $menu[] = array( 'act' => 'privacy',	'name' => L('private_setting') );
         if ($is_domain_on == 1)
         	$menu[] = array( 'act' => 'domain',	'name' => L('self_domain') );
@@ -26,12 +23,15 @@ class AccountAction extends Action
         $menu[] = array( 'act' => 'bind',		'name' => L('outer_bind') );
         $menu[] = array( 'act' => 'credit',		'name' => L('integral_rule') );
         Addons::hook('home_account_tab', array('menu'=>& $menu));
+        
         $this->assign('accountmenu', $menu);
     }
 
     // 有不存在的ACTION操作的时候执行
     protected function _empty() {
+    	
     	if (empty($_POST)) {
+			
     		$this->display('addons');
 		}
 	}

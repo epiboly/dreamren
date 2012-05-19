@@ -131,6 +131,8 @@ class SpaceAppShowAddons extends SimpleAddons
 	{
 	    return array('config' => '全局配置');
 	}
+	
+	
 	public function config(){
 	    $config= model('AddonData')->lget('space_app_show');
 	    $this->assign('valid',self::$validApps);
